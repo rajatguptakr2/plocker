@@ -20,7 +20,7 @@ app.controller('list', function ($scope, $http, $location, $cookieStore, $timeou
     ];
 
     $scope.view = function (id) {
-        //alert(id);
+        alert(id);
         $cookieStore.put('detail', id);
         $location.path('/view');
     }
