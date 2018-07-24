@@ -4,7 +4,11 @@ app.controller('list', function ($scope, $http, $location, $cookieStore, $timeou
     // if (!$cookieStore.get('userinfo')) {
     //     $location.path('/login');
     // }
-
+    $scope.views = function (id) {
+        //alert(id);
+        $cookieStore.put('detail', id);
+        $location.path('/view');
+    }
 
 
     loading.deactive();
@@ -16,6 +20,10 @@ app.controller('list', function ($scope, $http, $location, $cookieStore, $timeou
     ];
 
     $scope.view = function (id) {
-        alert(id);
+        //alert(id);
+        $cookieStore.put('detail', id);
+        $location.path('/view');
     }
-});
+
+
+}); 
