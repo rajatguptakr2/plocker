@@ -1,0 +1,352 @@
+@charset "utf-8";
+/* CSS Document */
+
+.floating-labels{
+    margin-top:40px; float:left; width:100%;
+}
+.group:last-child{margin-bottom:20px;}
+.group-margin label{top:-9px !important;}
+.group {
+  position: relative;
+  width: 100%;
+  margin-bottom:20px; float:left;
+}
+.group input {
+  border: none;
+  border-bottom:2px solid #f8063e;
+  padding: 10px 0;
+  display: block;
+  width: 100%;
+  background: transparent;
+  color: #fff;
+}
+.group input:focus {
+  outline: none;
+}
+.group input:focus ~ label, .group input:valid ~ label {
+  top: -12px;
+  font-size: 14px;
+  color: #ccc;
+}
+.group label {
+  position: absolute;
+  color: #fff;
+  top: -8px;
+  left: 0;
+  -webkit-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+
+.bar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.bar:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  background: #ccc;
+  height:2px;
+  -webkit-transition: left 0.2s ease-out, right 0.2s ease-out;
+  transition: left 0.2s ease-out, right 0.2s ease-out;
+}
+
+input:focus ~ .bar:before {
+  left: 0;
+  right: 0;
+}
+
+
+
+/* Loadibg */
+.loading-overlay{ position:fixed;top:0;right:0;bottom:0;left:0; background:rgba(0, 0, 0, 0.7); height:100%; width:100%; display:
+table; z-index:99999999;}
+.loading {
+  position: absolute;
+  background-color: #393635;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  border: 2px solid #b70034;
+  background-image:url(../images/loading-icon.png);
+  background-repeat:no-repeat;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: table;
+  margin: auto;
+}
+.loading:after {
+  content: '';
+  background: trasparent;
+  width: 120%;
+  height: 120%;
+  position: absolute;
+  border-radius: 100%;
+  top: -10%;
+  left: -10%;
+  opacity: 0.7;
+  box-shadow: rgba(255, 255, 255, 0.6) -4px -5px 3px -3px;
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+
+.input-field-or {
+  background-image: url(../images/mid-line.png);
+  background-repeat: repeat-x;
+  height: 40px;
+  float: left;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+  background-position: center;
+}
+
+.input-field-or span{border-radius:100%;width:40px;height:40px;background: #191717;display:inline-block;color: #fff;font-size: 18px;line-height:40px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.custom-select {
+  border: 1px solid #f8063e;
+  border-radius: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  display: inline-block;
+  padding:5px 43px 5px 10px;
+  width: 100%;
+  color: #fff;
+  border-radius: 14px;
+  line-height: 28px; outline:0; text-align-last: center; text-align:center;font-size: 16px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .custom-select {
+    background: #f8063e url(../../assets/images/drop-icon.png) 95% 50% no-repeat;
+  }
+}
+
+.custom-select-gray {
+  border: 1px solid #2e2c2c;
+  border-radius: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 10px;
+  width: 100%;
+  color: #fff;
+  border-radius: 14px;
+  line-height: 28px; outline:0; text-align-last: center; text-align:center;font-size: 16px;
+}
+input{color:#fff;}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .custom-select-gray {
+    background: #2e2c2c url(../../assets/images/drop-icon.png) 95% 50% no-repeat;
+  }
+}
+select option{text-align:center;}
+
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #fff;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color:  #fff;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color:  #fff;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color:  #fff;
+}
+
+.input-field-btn{ float:left; width:100%; margin:10px 0 20px;}
+.input-field-btn .btn-info{text-align:center; width:50%; float:left;}
+.input-field-btn .btn-info:nth-child(1){padding-right:20px;}
+.input-field-btn .btn-info:nth-child(2){padding-left:20px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.wrp {
+  text-align: center;
+  height: 100%;
+  width: 100%; float:left;
+}
+.wrp::before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.icon {
+  display: inline-block;
+  font-size:30px;
+  line-height:60px;
+  height: 60px;
+  width: 60px;
+  margin-right: 20px;
+  color: #4099ff;
+  border-radius: 100%;
+  position: relative;
+}
+.icon:last-child {
+  margin-right:0px;
+}
+
+.icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  background:#000;
+  border:2px solid #f8063e;
+  z-index: -1;
+}
+.icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+  transform: scale(0);
+  background: #4099ff;
+  border-radius: 100%;
+  z-index: -1;
+}
+.icon:hover {
+  animation-name: bubble2;
+  animation-duration: 0.5s;
+  animation-delay: 0.1s;
+  animation-fill-mode: forwards;
+}
+.icon:hover::after {
+  animation-name: bubble;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+.icon-twitter {
+  color: #fff;
+}
+.icon-twitter::after {
+  background: #4099ff;
+}
+.icon-facebook {
+  color: #fff;
+}
+.icon-facebook::after {
+  background: #3b5998;
+}
+.icon-instagram {
+  color: #fff;
+}
+.icon-instagram::after {
+  background: #3f729b;
+}
+.icon-gplus {
+  color: #fff;
+}
+.icon-gplus::after {
+  background: #dc4e41;
+}
+@-moz-keyframes bubble {
+  100% {
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes bubble {
+  100% {
+    transform: scale(1);
+  }
+}
+@-o-keyframes bubble {
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bubble {
+  100% {
+    transform: scale(1);
+  }
+}
+@-moz-keyframes bubble2 {
+  100% {
+    color: #fff;
+  }
+}
+@-webkit-keyframes bubble2 {
+  100% {
+    color: #fff;
+  }
+}
+@-o-keyframes bubble2 {
+  100% {
+    color: #fff;
+  }
+}
+@keyframes bubble2 {
+  100% {
+    color: #fff;
+  }
+}
+
+
+
+

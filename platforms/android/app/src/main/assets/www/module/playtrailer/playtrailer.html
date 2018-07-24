@@ -1,0 +1,55 @@
+<div class="video-logo-video">
+    <img src="assets/images/logo.png" /> </div>
+<div class="video-relative">
+    <header ng-if="deviceplatform == 'iOS'">
+        <div class="mob-lg-12">
+            <div class="mob-display-table">
+                <div class="mob-display-cell" ng-click="userNavigation()">
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="video-relative-video">
+        <div ng-controller="playtrailer as controller" class="videogular-container">
+
+            <videogular vg-auto-play="controller.config.autoPlay" vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.Complete()"
+                vg-theme="controller.config.theme.url">
+
+                <vg-media vg-src="controller.config.sources" vg-tracks="controller.config.tracks">
+                </vg-media>
+                <!-- <span class="skip-btn" ng-if="is_skipped == '1'" ng-click="skip_advertise()">Skip</span> -->
+                <div ng-if="is_skippeds != '2'">
+                    <vg-controls vg-autohide="true" vg-autohide-time="4000">
+
+                        <vg-play-pause-button></vg-play-pause-button>
+
+                        <vg-scrub-bar>
+                            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                        </vg-scrub-bar>
+                        <vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
+
+
+                        <vg-volume>
+                            <vg-mute-button></vg-mute-button>
+                            <vg-volume-bar></vg-volume-bar>
+                        </vg-volume>
+                        <!--<vg-time-download><i class="fa fa-download" aria-hidden="true"></i></vg-time-download>-->
+
+                        <vg-fullscreen-button></vg-fullscreen-button>
+
+                    </vg-controls>
+                    <vg-overlay-play></vg-overlay-play>
+                    <vg-buffering></vg-buffering>
+                </div>
+                <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+
+                <div class="my-logo-layer" ng-show="controller.API.currentState != 'play'">
+                    <img src="assets/images/logo.png">
+                </div>
+            </videogular>
+
+        </div>
+
+    </div>
+</div>

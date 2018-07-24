@@ -1,0 +1,109 @@
+<div ng-controller="register" ng-init="step1()" id="testing">
+    <div class="login-relative">
+        <header ng-if="deviceplatform == 'iOS'">
+            <div class="mob-lg-12">
+                <div class="mob-display-table">
+                    <div class="mob-display-cell" ng-click="userNavigation()">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <article>
+            <div class="mob-lg-12">
+                <div class="mob-lg-12 login-logo">
+                    <img src="assets/images/logo.png">
+                </div>
+            </div>
+            <div class="mob-lg-12">
+                <h1 class="center white-color"> Your account details </h1>
+            </div>
+        </article>
+        <article>
+            <div class="mob-lg-12">
+                <form method="post" name="registerform" class="form-label" novalidate>
+                    <div class="floating-labels">
+                        <div class="group">
+                            <input class="inputMaterial" type="text" name="fname" ng-model="fname" maxlength="70" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="labelCheck">First Name</label>
+                        </div>
+                        <div class="group">
+                            <input class="inputMaterial" type="text" name="lname" ng-model="lname" maxlength="70" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="labelCheck">Last Name </label>
+                        </div>
+                        <div class="group">
+                            <input class="inputMaterial" type="email" validate-email name="email_id" ng-model="email_id" maxlength="70" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="labelCheck">Email ID </label>
+                        </div>
+                        <div class="group">
+                            <input class="inputMaterial" type="password" name="password" ng-model="password" maxlength="15" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="labelCheck">Password </label>
+                        </div>
+                        <div class="group">
+                            <div class="input-label">
+                                <input type="text" name="address" ng-model="address" maxlength="70" placeholder="Address" required>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <div class="input-label-gray">
+                                <input type="text" name="unit" ng-model="unit" maxlength="70" placeholder="House/Apt/Unit" required>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <select type="select" ng-model="country_id" ng-init="country_id" name="country_id" ng-change="getcity(country_id)" class="custom-select"
+                                required>
+                                <option value="">Select Country</option>
+                                <option value="{{x.country_id}}" ng-repeat="x in country"> {{x.name}}</option>
+                            </select>
+                        </div>
+                        <div class="group">
+                            <select type="select" ng-model="city_id" ng-init="city_id" name="city_id" class="custom-select-gray" required>
+                                <option value="">Select City</option>
+                                <option value="{{x.city_id}}" ng-repeat="x in city"> {{x.name}}</option>
+                            </select>
+                        </div>
+
+                        <div class="group">
+                            <select type="select" ng-model="gender" ng-init="gender" name="gender" class="custom-select" required>
+                                <option value="">Select Gender</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="input-field-btn">
+                        <button class="btn-pink" ng-click="subs_type('registerform','2')">Next </button>
+                        <!-- <div class="btn-info">
+                            <button class="btn-pink" ng-click="subs_type('registerform','1')">Subscription </button>
+                        </div>
+                        <div class="btn-info">
+                        </div>
+                         -->
+                    </div>
+                </form>
+                <!-- <div class="input-field-or"> <span> OR </span> </div> -->
+            </div>
+            <!-- <div class="wrp">
+                <a class="icon icon-twitter" href="#">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icon icon-facebook" href="#">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                <a class="icon icon-instagram" href="#">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </a>
+            </div> -->
+        </article>
+    </div>
+</div>

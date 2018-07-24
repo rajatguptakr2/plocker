@@ -1,0 +1,120 @@
+<div ng-controller="download">
+    <header>
+        <div class="mob-lg-12 header-dark">
+            <div class="mob-display-table">
+                <div class="mob-display-cell" ng-click="home()"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                <div class="mob-display-cell" ng-click="remove()">My Downloads </div>
+            </div>
+        </div>
+    </header>
+
+    <section ng-init="recent_views()">
+
+        <div class="fixed-movies-section">
+
+            <div class="watch-list-download-left series" ng-click="init('series')">
+                <span class="title-allno"> Series </span>
+                <span class="allno-movies"> ({{counts.series_count}}) </span>
+            </div>
+
+            <div class="watch-list-download-right movies" ng-click="init('movies')">
+                <span class="title-allno"> Movies </span>
+                <span class="allno-movies"> ({{counts.movies_count}}) </span>
+            </div>
+        </div>
+
+
+        <div class="mob-lg-12">
+            <div class="download-table">
+
+                <div class="watch-list">
+
+
+
+                    <div class="clearfix "></div>
+
+                    <h1 ng-if="download_list == ''" class="no-record-h1">No Record Found</h1>
+                    <!-- <h1 ng-if=" progresss !='' && download_list=='' "> What you've been watching </h1> -->
+                    <!-- <spna ng-if="progresss.length  != '0' " style="margin: 10px 0px; float: left; width: 100%;">Downloads In Progress</spna> -->
+
+                    <!-- <ul ng-repeat="i in progresss" id="id_{{$index}}" >
+                        <li style="margin-top: 10px;" >
+
+                            <div class=" watch-list-left "> <img src="{{i[5]}} "></div>
+                            <div class="watch-list-right " style=" border-bottom: 1px #fff solid; height: 90px; ">
+                                    <i ng-click="progress_data($index, i[2])" class="fa fa-times download-close" aria-hidden="true"></i>
+                                <div class="watch-list-right-top ">
+                                    <h1 style="text-align: left ">{{i[6]}}</h1>
+
+                                </div>
+                                <div class="watch-list-right-bottom " style="line-height: 27px ">
+                                    <span style="font-size: 12px;color: #b3b3b3;margin-bottom: 10px;display: block; "> {{i[2]|uppercase}} |  {{i[0]  | number : 2}} MB / {{i[7] | number : 2}} MB</span></h1>
+                                    <div class="watch-list-right-bottom-inner " style="padding-left: 0px ">
+                                        <h2 style="border: 0; ">
+                                            <span class="watch-list-date " ng-if="i[4] !='100' " style="color:#eae4e5 ">Downloading |  </span>
+                                            <span class="watch-list-date " ng-if="i[4]  =='100' " style="color:#eae4e5 ">Downloaded |  </span>
+                                            <span class="watch-list-date-text " style="padding-left: 4px; "> {{i[4]| number : 0}} %</span>
+                                        </h2>
+                                    </div>
+                                    <div style="width: 100%; background-color: #ddd; margin-top: 48px; ">
+                                        <div class="skills html " style=" text-align: right; padding-right: 5px; height: 2px; width: {{i[4]}}%; background-color: #f70931; "></div>
+                                    </div>
+                                </div>
+                                <div class="clearfix "></div>
+                            </div>
+                        </li>
+                    </ul> -->
+                    <div class="outer_movieslist">
+
+
+
+                        <ul ng-repeat="i in download_list" id="id_{{$index}}">
+
+                            <li style="margin-top: 10px;">
+
+                                <div class=" watch-list-left ">
+                                    <img ng-if="i.series_banner" ng-click="playoffline(i.download_name, i.series_banner,i.type,i.series_name)" src="{{i.series_banner}} ">
+                                    <img ng-if="i.movie_banner" ng-click="playoffline(i.download_name,i.movie_banner,i.type,i.movie_name)" src="{{i.movie_banner}} ">
+
+                                </div>
+                                <div class="watch-list-right " style=" border-bottom: 1px #fff solid; height: 90px; ">
+                                    <i ng-if="i.series_banner" ng-click="delete_media(i.download_name, i.series_banner,i.type,i.series_name, $index, i.series_id)"
+                                        class="fa fa-trash-o download-close" aria-hidden="true"></i>
+                                    <i ng-if="i.movie_banner" ng-click="delete_media(i.download_name,i.movie_banner,i.type,i.movie_name, $index, i.movies_id)"
+                                        class="fa fa-trash-o download-close" aria-hidden="true"></i>
+                                    <div class="watch-list-right-top ">
+
+                                        <h1 style="text-align: left " ng-if="i.movie_banner">{{i.movie_name}}</h1>
+                                        <h1 style="text-align: left " ng-if="i.series_name">{{i.series_name}}</h1>
+
+                                    </div>
+                                    <div class="watch-list-right-bottom " style="line-height: 27px ">
+                                        <span style="font-size: 12px;color: #b3b3b3;margin-bottom: 10px;display: block; "> {{i.type | uppercase}}</span></h1>
+                                        <div class="watch-list-right-bottom-inner " style="padding-left: 0px ">
+                                            <h2 style="border: 0; ">
+
+                                                <span class="watch-list-date " style="color:#eae4e5 ">DOWNLOADED </span>
+                                                <!-- <span class="watch-list-date-text " style="padding-left: 4px; "> {{i[4]| number : 0}} %</span> -->
+                                            </h2>
+                                        </div>
+                                        <div style="width: 100%; background-color: #ddd; margin-top: 48px; ">
+                                            <div class="skills html " style=" text-align: right; padding-right: 5px; height: 2px; width: {{i[4]}}%; background-color: #f70931; "></div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix "></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- <div  class="download-table-cell" ng-if="progresss.length  == '0' ">
+                    <div  class="download-table-cell-icon"> <i class="fa fa-download" aria-hidden="true"></i></div>
+                    <div  class="download-table-cell-text">No Current Downloads</div>
+
+                </div> -->
+
+            </div>
+        </div>
+    </section>
+</div>

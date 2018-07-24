@@ -1,0 +1,157 @@
+<div ng-controller="myaccount" ng-init="userdata()">
+    <div class="login-relative">
+        <header ng-if="deviceplatform == 'iOS'">
+            <div class="mob-lg-12">
+                <div class="mob-display-table">
+                    <div class="mob-display-cell" ng-click="userNavigation()">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <article>
+            <div class="mob-lg-12">
+                <div class="logo">
+                    <img src="assets/images/logo.png">
+                </div>
+                <div class="terms-condition" ng-if="subscription_type == '2'" ng-click="go_to_cms(2)"> terms & conditions </div>
+                <!--<div class="terms-condition" ng-controller=""/module/sidemenu/sidemenu" ng-click="changepassword"> Change Password </div>-->
+                <h2 class="center white-color no-margin">Your account details </h2>
+                <div class="update-text-center">
+                    <!-- <div class="update-btn"> Update </div>     -->
+                </div>
+
+            </div>
+        </article>
+
+        <div class="modal-overlay new">
+            <div class="modal-overlay-white">
+                <div class="close-icon cancel" ng-click="closed()"></div>
+                <div class="modal-header title"></div>
+                <div class="modal-body">
+                    <p class="message"></p>
+                </div>
+                <div class="modal-footer">
+                    <div ng-click="confirmation()" class="modal-close confirm"> Ok </div>
+                    <div ng-click="closed()" class="modal-close cancel"> Close </div>
+                </div>
+            </div>
+        </div>
+
+        <article>
+            <form method="post" name="myaccount" class="form-label" novalidate>
+                <div class="mob-lg-12">
+                    <div class="floating-labels no-margin-top">
+                        <div class="group">
+                            <input class="inputMaterial" type="text" name="fname" ng-model="fname" maxlength="70" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>First Name</label>
+                        </div>
+
+                        <div class="group">
+                            <input class="inputMaterial" type="text" name="lname" ng-model="lname" maxlength="70" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Last Name </label>
+                        </div>
+
+                        <div class="group">
+                            <input class="inputMaterial" type="text" name="email_id" ng-model="email_id" maxlength="70" disabled>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <!--<label>Email ID </label>-->
+                        </div>
+
+                        <div class="group">
+                            <div class="input-label">
+                                <input type="text" name="address" ng-model="address" maxlength="70" placeholder="Address" required>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <div class="input-label-gray">
+                                <input type="text" name="unit" ng-model="unit" maxlength="70" placeholder="Apt/Unit" required>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <select type="select" ng-model="country_id" ng-init="country_id" name="country_id" ng-change="getcity(country_id)" class="custom-select"
+                                required>
+                                <option value="">Select Country</option>
+                                <option value="{{x.country_id}}" ng-repeat="x in country"> {{x.name}}</option>
+                            </select>
+                        </div>
+                        <div class="group">
+                            <select type="select" ng-model="city_id" ng-init="city_id" name="city_id" class="custom-select-gray" required>
+                                <option value="">Select City</option>
+                                <option value="{{x.city_id}}" ng-repeat="x in city"> {{x.name}}</option>
+                            </select>
+                        </div>
+
+                        <div class="group">
+                            <select type="select" ng-model="gender" ng-init="gender" name="gender" class="custom-select" required>
+                                <option value="">Select Gender</option>
+                                <option value="1"> Male </option>
+                                <option value="2"> Female </option>
+                            </select>
+                        </div>
+
+                        <div ng-show="subscription_type === '2'">
+
+                            <div class="group int_cl">
+                                <select type="select" ng-repeat="z in user_interest" ng-model="z.interest_id" class="custom-select-one">
+                                    <option value="">Select Interest {{$index + 1}}</option>
+                                    <option value="{{x.interest_id}}" ng-repeat="x in interest_list"> {{x.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div ng-show="subscription_type == '1'">
+                            <div class="group">
+                                <div class="input-label">
+                                    <input type="text" name="card_number" ng-model="card_number" minlength="16" maxlength="16" placeholder="Card Number">
+                                </div>
+                            </div>
+                            <div class="group">
+                                <div class="input-label">
+                                    <input type="text" name="cvv_number" ng-model="cvv_number" minlength="3" maxlength="3" placeholder="CVV Number">
+                                </div>
+                            </div>
+                            <div class="group">
+                                <select type="select" ng-model="expiry_month" ng-init="expiry_month" style="width:48%;" name="expiry_month" class="custom-select-gray">
+                                    <option value="">Select Month</option>
+                                    <option value="{{x}}" ng-repeat="x in nextmonth"> {{x}}</option>
+                                </select>
+
+                                <select type="select" ng-model="expiry_year" name="expiry_year" style="width:50%;" class="custom-select-gray">
+                                    <option value="">Select Year</option>
+                                    <option value="{{x}}" ng-repeat="x in nextdate"> {{x}}</option>
+                                </select>
+                            </div>
+                            <div class="input-field-btn">
+                                <div class="btn-info">
+                                    <button class="btn-pink" ng-click="fill_convert()"> Free </button>
+                                </div>
+                                <div class="btn-info" ng-controller="sidemenu">
+                                    <button class="btn-pink" ng-click="logout()">Log out </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="input-field-btn center">
+                        <button class="background-pink" style="width: 40%;" ng-click="myaccounts('myaccount')">Save</button>
+                    </div>
+
+                    <div class="terms-condition" ng-if="subscription_type == '1'" ng-click="go_to_cms(2)"> Terms & Conditions</div>
+                    <div>&nbsp;</div>
+                </div>
+            </form>
+        </article>
+    </div>
+</div>
+
+<script>
+    console.log($('#a0').addClass('custom-select'));
+
+</script>

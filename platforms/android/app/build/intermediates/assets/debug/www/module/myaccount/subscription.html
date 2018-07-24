@@ -1,0 +1,74 @@
+<div ng-controller="myaccount">
+    <div class="login-relative">
+        <article>
+            <div class="mob-lg-12">
+                <div class="logo"> <img src="assets/images/logo.png"></div>
+            </div>
+            <div class="mob-lg-12">
+                <h1 class="center white-color no-margin-bottom"> Subscription </h1>
+                <h2 class="center white-color no-margin-bottom">$4.99pr Month</h2>
+                <h3 class="center white-color no-margin"> Ad Free </h3>
+            </div>
+        </article>
+        <article ng-init="convert_user()">
+            <form method="post" name="subscription_reg" class="form-label" novalidate> 
+                <div class="mob-lg-12">
+                    <div class="floating-labels">
+<!--                        <div class="group">
+                            <input class="inputMaterial" type="text" name="fname" ng-model="fname" maxlength="70" required>
+                            <span class="highlight"></span> <span class="bar"></span>
+                            <label>First Name</label>
+                        </div>
+                        <div class="group">
+                            <input class="inputMaterial" type="text" name="lname" ng-model="lname" maxlength="70" required>
+                            <span class="highlight"></span> <span class="bar"></span>
+                            <label>Last Name </label>
+                        </div>
+                        <div class="group">
+                            <div class="input-label">
+                                <input type="text" name="address" ng-model="address" maxlength="70" placeholder="Address" required>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <select type="select" ng-model="country_id" ng-init="country_id" name="country_id" ng-change="getcity(country_id)" class="custom-select-gray" required>
+                                <option value="">Select Country</option>
+                                <option  value="{{x.country_id}}" ng-repeat="x in country"> {{x.name}}</option>
+                            </select>
+                        </div>
+                        <div class="group">
+                            <select type="select" ng-model="city_id" ng-init="city_id" name="city_id"  class="custom-select" required>
+                                <option value="">Select City</option>
+                                <option  value="{{x.city_id}}" ng-repeat="x in city"> {{x.name}}</option>
+                            </select>
+                        </div>-->
+                        <div class="group">
+                            <div class="input-label-gray">
+                                <input type="text"  valid-number  name="creditcard" ng-model="creditcard" minlength="16" maxlength="16" placeholder="Credit Card Number" required>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <select style="width:48%;" type="select" ng-model="expiry_month" ng-init="expiry_month" name="expiry_month"  class="custom-select" required>
+                                <option value="">Select Month</option>
+                                <option  value="{{x}}" ng-repeat="x in nextmonth"> {{x}}</option>
+                            </select>
+                        
+                            <select style="width:50%;" type="select" ng-model="expiry_year"  name="expiry_year"  class="custom-select" required>
+                                <option value="">Select Year</option>
+                                <option  value="{{x}}" ng-repeat="x in nextdate"> {{x}}</option>
+                            </select>
+                        </div>
+                        <div class="group">
+                            <div class="input-label-gray">
+                                <input type="text"  only-digits ng-model="cvvcode" name="cvvcode" minlength="3" maxlength="3" placeholder="CSS Code" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="input-field-btn center">
+                        <button class="go" ng-click="reg_submit('subscription_reg')"> GO </button>
+                    </div>
+                </div>
+            </form>
+        </article>
+    </div>
+</div>

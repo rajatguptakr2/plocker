@@ -1,0 +1,74 @@
+<div ng-controller="sidemenu">
+
+    <header ng-if="type == 'movies'">
+        <div class="mob-lg-12 header-dark">
+            <div class="mob-display-table">
+                <div class="mob-display-cell"><i class="fa fa-navicon material-icons" aria-hidden="true" sidebarjs-toggle></i></div>
+                <div class="mob-display-cell"> Movies 
+                   
+                    
+                    <div class="search-bg-relative" ng-click="go_to_search(type)">
+                        <div class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></div>
+                        <input type="text" placeholder="Search" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <header ng-if="type == 'series'">
+        <div class="mob-lg-12 header-dark">
+            <div class="mob-display-table">
+                <div class="mob-display-cell"><i class="fa fa-navicon material-icons" aria-hidden="true" sidebarjs-toggle></i></div>
+                <div class="mob-display-cell"> Series
+                    <div class="search-bg-relative" ng-click="go_to_search(type)">
+                        <div class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></div>
+                        <input type="text" placeholder="Search" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--ng-include src="'module/sidemenu/search.html'"></ng-include-->
+    <sidebarjs>
+        <!-- ng-app="DemoApp"-->
+        <h3> <img src="assets/images/logo.png" width="200" /></h3>
+        <nav>
+            <div>
+                <a sidebarjs-toggle href="javascript:void(0)" ng-click="home('1')">
+                    <div class="img-watch"> <i class="fa fa-film" aria-hidden="true"></i> </div>
+                    <div class="img-watch-text">Movies</div>
+                </a>
+                <a sidebarjs-toggle href="javascript:void(0)" ng-click="home('2')">
+                    <div class="img-watch"><i class="fa fa-video-camera" aria-hidden="true"></i></div>
+                    <div class="img-watch-text">Series</div>
+                </a>
+                <a sidebarjs-toggle ng-click="myaccount()" href="javascript:void(0)">
+                    <div class="img-watch"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+                    <div class="img-watch-text">My Account</div>
+                </a>
+                <a sidebarjs-toggle ng-click="mydownload()" href="javascript:void(0)">
+                    <div class="img-watch"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+                    <div class="img-watch-text">My Downloads</div>
+                </a>
+                <a sidebarjs-toggle href="javascript:void(0)" ng-click="recent_view()">
+                    <div class="img-watch"><i class="fa fa-eye" aria-hidden="true"></i></div>
+                    <div class="img-watch-text">Recently View</div>
+                </a>
+                
+                <a ng-if="social_login == null" sidebarjs-toggle ng-click="changepassword()" href="javascript:void(0)">
+                    <div class="img-watch"><i class="fa fa-key" aria-hidden="true"></i></div>
+                    <div class="img-watch-text">Change Password</div>
+                </a>
+                <a sidebarjs-toggle ng-click="go_to_cms(1)" href="javascript:void(0)">
+                    <div class="img-watch"><i class="fa fa-info-circle" aria-hidden="true"></i></div>
+                    <div class="img-watch-text">How It Works</div>
+                </a>
+
+                <a sidebarjs-toggle ng-click="logout()" href="javascript:void(0)">
+                    <div class="img-watch"><i class="fa fa-sign-out" aria-hidden="true"></i></div>
+                    <div class="img-watch-text">Logout</div>
+                </a>
+            </div>
+        </nav>
+    </sidebarjs>
+</div>

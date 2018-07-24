@@ -1,0 +1,42 @@
+<div ng-controller="series_detail">
+    <header>
+        <div class="mob-lg-12 header-dark">
+            <div class="mob-display-table">
+                <div class="mob-display-cell" ng-click="home()"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                <div class="mob-display-cell">Episodes
+                    <div class="search-bg-relative" ng-click="go_to_search(type)">
+                        <div class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></div>
+                        <input type="text" placeholder="Search" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="movie-slider" ng-click="detail(series.series_id)">
+            <div class="video-logo-bottom">WATCHit<span class="icon_pink">.</span></div>
+            <img src="{{series.image}}">
+        </div>
+        <div ng-if="series_list.length == '0'">No Record Found</div>
+        <div class="episodes">
+            <!--ul ng-init="google()" infinite-scroll='abc()' infinite-scroll-disabled='reddit.busy' infinite-scroll-distance='1' infinite-scroll-use-document-bottom="true"-->
+            <ul>
+                <li ng-repeat="i in series_list" ng-click="series_details(i.id, i.series_id)">
+                       
+                    <div class="episodes-left">
+                     
+                        <div class="episodes-go" ng-click="play_video(i.series_id , i.id ,'series',i.video)"><img src="assets/images/watch-icon.png" /></div>
+                        <img src="{{i.image}}"> </div>
+                       
+                    <div class="episodes-right" ng-click="play_video(i.series_id, i.id,'series')">
+                        <h1>{{i.title}}</h1>
+                        <h2>Season {{i.season}} Episode {{i.episode}}: {{i.description}}: - Version 1</h2>
+
+
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+</div>

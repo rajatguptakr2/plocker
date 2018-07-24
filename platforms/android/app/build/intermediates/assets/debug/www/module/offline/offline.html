@@ -1,0 +1,69 @@
+<style>
+    .download-table {
+        position: relative
+    }
+</style>
+
+<div ng-controller="offline">
+    <header>
+        <div class="mob-lg-12 header-dark">
+            <div class="mob-display-table">
+                <div class="mob-display-cell">
+                    <i class="fa fa-angle-left hide" aria-hidden="true"></i>
+                </div>
+                <div class="mob-display-cell">Offline Downloads </div>
+            </div>
+        </div>
+    </header>
+    <section ng-init="offline_init()"  class="watchi12-section">
+        <div class="mob-lg-12 watchit12-bottom">
+            <div class="download-table">
+
+                <div class="watch-list">
+
+                    <h1 ng-if="progresss == '' && download_list == ''">No Record Found</h1>
+                    <h1 ng-if=" progresss !='' && download_list=='' "> What you've been watching </h1>
+
+
+                    <div class="clearfix "></div>
+                    <ul class="iamdone" ng-repeat="i in arrayText" id="id_{{$index}}">
+                        <!-- <ul> -->
+                        <li style="margin-top: 10px;" id="$index">
+                            <div class=" watch-list-left " ng-click="playoffline(i.playURL, i.liveUrl, i.type, i.ChangeName, i.name)"> <img src="assets/images/logo-splash.png"></div>
+                            <div class="watch-list-right " style=" border-bottom: 1px #fff solid; height: 90px; ">
+                                    <i ng-click="delete_media(i.playURL, i.liveUrl, i.type, i.ChangeName, i.name, $index, i.typeID)" class="fa fa-trash-o download-close" aria-hidden="true"></i>
+                                <div class="watch-list-right-top ">
+                                    <h1 style="text-align: left ">{{i[6]}}</h1>
+                                </div>
+                                <div class="watch-list-right-bottom " style="line-height: 27px ">
+                                    <span style="font-size: 12px;color: #b3b3b3;margin-bottom: 10px;display: block; "> {{i.ChangeName|uppercase}}</span></h1>
+                                    <div class="watch-list-right-bottom-inner " style="padding-left: 0px ">
+                                        <h2 style="border: 0; ">
+                                            <span class="watch-list-date " ng-if="i[4] !='100' " style="color:#eae4e5 ">{{i.type|uppercase}} </span>
+                                        </h2>
+                                    </div>
+                                    <div style="width: 100%; background-color: #ddd; margin-top: 48px; ">
+                                        <div class="skills html " style=" text-align: right; padding-right: 5px; height: 2px; width: {{i[4]}}%; background-color: #f70931; "></div>
+                                    </div>
+                                </div>
+                                <div class="clearfix "></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="download-table-cell" ng-if="arrayText.length  == '0' ">
+                    <div class="download-table-cell-icon"> <i class="fa fa-ban" aria-hidden="true"></i></div>
+                   <br>
+                   <br>
+                   <br>
+                    <div class="download-table-cell-text">No Internet Connection</div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </secsstion>
+    <div ng-click="CheckConnection()" class="fixed-bottom-section" id="connect"> No Connection<span class="goonline_span"><u>GO ONLINE</u></span></div>
+    <div  class="fixed-bottom-section hide" id="connectoffline">Connection Established <span></span></div>
+</div>

@@ -1,0 +1,65 @@
+<div ng-controller="register" ng-init="step2()">
+    <div class="login-relative">
+        <article>
+            <div class="mob-lg-12">
+                <div class="logo"> <img src="assets/images/logo.png"></div>
+            </div>
+            <div class="mob-lg-12">
+                <h1 class="center white-color no-margin-bottom"> Your account details </h1>
+                <h2 class="center white-color no-margin">FREE ACCOUNT</h2>
+                <h3 class="center white-color topmargin-lg"> We require these details for your </h3>
+                <div class="line"></div>
+                <h3 class="center white-color"> free account </h3>
+            </div>
+        </article>
+        <article>
+            <div class="mob-lg-12">
+             <form method="post" name="registerform_two" class="form-label" novalidate> 
+                <div class="floating-labels">
+                    <div class="group">
+                        <div class="input-label">
+                            <input type="text" ng-model="age"  name="age"   valid-number placeholder="Age"  maxlength="2" required>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <select type="select" ng-model="income_level_id" ng-init="income_level_id" name="income_level_id" class="custom-select-gray" required >
+                            <option value="">Select Income Level</option>
+                            <option  value="{{x.level_id}}" ng-repeat="x in income_levels"> {{x.level}}</option>
+                        </select>
+                    </div>
+                    <div class="group">
+                        <select type="select" ng-model="interest.interest_id[0]" ng-init="interest_id1" name="interest_id[]" class="custom-select" >
+                            <option value="">Select Interest 1</option>
+                            <option  value="{{x.interest_id}}" ng-repeat="x in interests"> {{x.name}}</option>
+                        </select>
+                    </div>
+                    <div class="group">
+                        <select type="select" ng-model="interest.interest_id[1]" ng-init="interest_id2" name="interest_id[]" class="custom-select-gray" >
+                            <option value="">Select Interest 2</option>
+                            <option  value="{{x.interest_id}}" ng-repeat="x in interests"> {{x.name}}</option>
+                        </select>
+                    </div>
+                    <div class="group">
+                        <select type="select" ng-model="interest.interest_id[2]" ng-init="interest_id3" name="interest_id[]" class="custom-select" >
+                            <option value="">Select Interest 3</option>
+                            <option  value="{{x.interest_id}}" ng-repeat="x in interests"> {{x.name}}</option>
+                        </select>
+                    </div>
+                    <div class="group">
+                        <select type="select" ng-model="interest.interest_id[3]" ng-init="interest_id4" name="interest_id[]" class="custom-select-gray">
+                            <option value="">Select Interest 4</option>
+                            <option  value="{{x.interest_id}}" ng-repeat="x in interests"> {{x.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="input-field-btn center">
+                    <button class="go" ng-click="reg_submit('registerform_two')"> GO </button>
+                </div>
+            </form>
+                <div class="input-field-or"> <span> OR </span> </div>
+            </div>
+            <div class="wrp"><a class="icon icon-twitter" href="#"><i class="fa fa-twitter"></i></a><a class="icon icon-facebook" href="#"><i class="fa fa-facebook"></i></a><a class="icon icon-instagram" href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></div>
+        </article>
+    </div>
+</div>

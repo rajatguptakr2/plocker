@@ -1,0 +1,166 @@
+<style>
+.search-for-top-input { display: none; width: 100%; position:fixed; overflow-y: scroll; top:0; width:100%; height:100%; background:#fff; z-index:9999999;}
+.absolute-list ul li { padding: 5px 18px !important; }
+.absolute-list ul { padding: 0 0px; }
+.search_for{position:fixed; width:100%;box-shadow: 0px 1px 5px #e4d3d3; z-index:9999999;}
+.relative-search{float:left; position:relative; width:100%;}
+.relative-search input{float:left; width:100%; padding:0 15px 0 30px; outline:0; width:100%; line-height:37px; height:37px; border:0;}
+.relative-search-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    width: 35px;
+    height: 37px;
+    font-size: 26px;
+    line-height: 37px;
+    padding: 0 10px;
+    text-align: center;
+    color: #000;
+}
+.relative-search-list-bg{ float:left; width:100%; padding:10px 15px; margin-top:40px;}
+.relative-search-ul{float:left; width:100%;}
+.relative-search-ul ul{margin:0; padding:0; float:left; width:100%;}
+.relative-search-ul ul li{margin:0; padding:0; float:left; width:100%; list-style:none;}
+.relative-search-ul-left{float:left; width:80px; margin-right:10px;}
+.relative-search-ul-left img{width:80px;}
+.relative-search-ul-right{overflow:hidden; position:relative}
+.relative-search-ul-right h1 {
+    float: left;
+    width: 100%;
+    font-size: 16px;
+    margin: 0 0 5px 0;
+    color: #b61e37;
+    line-height: normal;
+}
+.relative-search-ul-right h2 {
+    float: left;
+    width: 100%;
+    font-size: 13px;
+    margin: 0;
+    line-height: normal;
+    color: #555;
+}
+.relative-top-heading-bg{float:left; width:100%; margin-bottom:10px;}
+.relative-top-heading-bg-left{float:left; font-size:18px;color: #b61e37;}
+.relative-top-heading-bg-right{float:right; font-size:12px; background:#b61e37; color:#fff; padding:5px 10px; text-align:center; border-radius:3px; }
+</style>
+
+<div class="search-for-top-input" ng-controller="controls" > 
+    <div id="search_for" class="search_for">
+     <div class="relative-search">
+        <form name="userForm" ng-submit="result(search_word)" method="post"  novalidate >
+             <span class="relative-search-left"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+            <input type="search"  id="newbarcode" value="{{search_key}}" ng-model="search_word"  maxlength="100" style="color:#000" ng-keyup="search()" name="search_word" placeholder="Search by Product Name or Scan a Barcode" autocomplete="off"/>
+            <i class="ion-chevron-left arrow-searchs" ng-click="close_div()"></i>
+           
+        </form>
+        </div>
+         </div>
+         
+    <div class="relative-search-list-bg">   
+     <div class="relative-top-heading-bg">
+      <span class="relative-top-heading-bg-left"> Bollywood </span>
+      <span class="relative-top-heading-bg-right"> View All </span>
+      </div>
+    <div class="relative-search-ul">
+      <ul>
+        <li> 
+        <div class="relative-search-ul-left"> 
+          <img src="http://projects.tekshapers.in/watchit/assets/movie_image/a09d8355174423ad7e815c40bdae0cc0_thumb.jpg" />
+        </div> 
+        <div class="relative-search-ul-right">
+          <h1> Lorem Ipsum is simply dummy text of the printing.</h1>
+          <h2> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h2>
+         </div> 
+        </li>
+        <li> 
+        <div class="relative-search-ul-left"> 
+          <img src="http://projects.tekshapers.in/watchit/assets/movie_image/a09d8355174423ad7e815c40bdae0cc0_thumb.jpg" />
+        </div> 
+        <div class="relative-search-ul-right">
+          <h1> Lorem Ipsum is simply dummy text of the printing.</h1>
+          <h2> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h2>
+         </div> 
+        </li>
+        <li> 
+        <div class="relative-search-ul-left"> 
+          <img src="http://projects.tekshapers.in/watchit/assets/movie_image/a09d8355174423ad7e815c40bdae0cc0_thumb.jpg" />
+        </div> 
+        <div class="relative-search-ul-right">
+          <h1> Lorem Ipsum is simply dummy text of the printing.</h1>
+          <h2> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h2>
+         </div> 
+        </li>
+        <li> 
+        <div class="relative-search-ul-left"> 
+          <img src="http://projects.tekshapers.in/watchit/assets/movie_image/a09d8355174423ad7e815c40bdae0cc0_thumb.jpg" />
+        </div> 
+        <div class="relative-search-ul-right">
+          <h1> Lorem Ipsum is simply dummy text of the printing.</h1>
+          <h2> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h2>
+         </div> 
+        </li>
+        <li> 
+        <div class="relative-search-ul-left"> 
+          <img src="http://projects.tekshapers.in/watchit/assets/movie_image/a09d8355174423ad7e815c40bdae0cc0_thumb.jpg" />
+        </div> 
+        <div class="relative-search-ul-right">
+          <h1> Lorem Ipsum is simply dummy text of the printing.</h1>
+          <h2> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h2>
+         </div> 
+        </li>
+        
+        <li> 
+        <div class="relative-search-ul-left"> 
+          <img src="http://projects.tekshapers.in/watchit/assets/movie_image/a09d8355174423ad7e815c40bdae0cc0_thumb.jpg" />
+        </div> 
+        <div class="relative-search-ul-right">
+          <h1> Lorem Ipsum is simply dummy text of the printing.</h1>
+          <h2> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h2>
+         </div> 
+        </li>
+        
+        <li> 
+        <div class="relative-search-ul-left"> 
+          <img src="http://projects.tekshapers.in/watchit/assets/movie_image/a09d8355174423ad7e815c40bdae0cc0_thumb.jpg" />
+        </div> 
+        <div class="relative-search-ul-right">
+          <h1> Lorem Ipsum is simply dummy text of the printing.</h1>
+          <h2> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h2>
+         </div> 
+        </li>
+        
+        <li> 
+        <div class="relative-search-ul-left"> 
+          <img src="http://projects.tekshapers.in/watchit/assets/movie_image/a09d8355174423ad7e815c40bdae0cc0_thumb.jpg" />
+        </div> 
+        <div class="relative-search-ul-right">
+          <h1> Lorem Ipsum is simply dummy text of the printing.</h1>
+          <h2> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h2>
+         </div> 
+        </li>
+        
+        
+      </ul>
+    </div>
+    
+    
+    </div>
+        
+   
+</div>
+
+
+
+<div id="blank"></div>
+
+<!-- end search -->
+<script>
+    $('.search-btn').click(function(){
+        $('.search-for-top-input').toggle();
+    });
+    
+</script>
+
+

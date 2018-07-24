@@ -1,0 +1,22 @@
+<div ng-controller="list">
+
+    <div ng-include="'module/sidemenu/sidemenu.html'"></div>
+    <div style="margin-top:20px;">
+        <div class="search-bg-relative" style="float:initial; width:152">
+            <div class="search-btn">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+            <input type="text" ng-model='searchText' placeholder="Search" />
+        </div>
+        <div class="repeat-movie" ng-repeat="mov in listing | filter:searchText" ng-click="view(mov.id)">
+            <div class="relative-search-list-bg1">
+                <div class="relative-top-heading-bg list_part">
+                    <span class="relative-top-heading-bg-left"> {{$index+1}}:- {{mov.name}} </span>
+                    <!--<span class="relative-top-heading-bg-right"> View All </span>-->
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

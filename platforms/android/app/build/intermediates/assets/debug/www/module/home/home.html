@@ -1,0 +1,99 @@
+<div ng-controller="home">
+
+    <div ng-if="type == 'movies'">
+        <div ng-include="'module/sidemenu/sidemenu.html'"></div>
+
+        <main ng-init="category()">
+
+            <div class="slide-row">
+                <script type="text/ng-template" id="slider-top">
+
+                </script>
+
+                <slick class="slider" settings="slickConfig0" ng-if="slickConfig0Loaded">
+                    <div ng-repeat="i in number0" ng-click="movie(i.movie_id, 'movies')">
+                        <div class="video-logo"><img src="assets/images/watch-icon.png" /></div>
+                        <div class="video-logo-bottom"><img src="assets/images/watchit-icon2.png"></div>
+                        <div class="thumb-img">
+                            <img src="{{i.image}}">
+                        </div>
+                    </div>
+                </slick>
+                <!---End---->
+                <script type="text/ng-template" id="tpl-1">
+                    <img style="width: 100%;" src="{{k.image_thumb}}">
+                </script>
+
+                <div class="loop-angular" ng-repeat="i in listing" ng-if="i.movie_list">
+                    <div class="slider-heading-bg">{{i.cat_name}} <span ng-click="view_all(i.cat_id)" class="pull-right">View All</span> </div>
+                    <div class="slider-border">
+                        <slick class="slider" settings="slickConfig1" ng-if="slickConfig1Loaded">
+
+                            <div ng-if="i.movie_list" ng-repeat="k in i.movie_list" ng-click="movie(k.movie_id, 'movies')">
+                                <div class="thumb-img" ng-include="'tpl-1'"><img src="" /></div>
+
+                            </div>
+
+                        </slick>
+                    </div>
+
+                </div>
+                <!---End---->
+
+
+            </div>
+
+
+        </main>
+
+    </div>
+    <div ng-if="type == 'series'">
+        <div ng-include="'module/sidemenu/sidemenu.html'"></div>
+        <main ng-init="category()">
+
+            <div class="slide-row">
+                <script type="text/ng-template" id="slider-top">
+
+                </script>
+
+                <slick class="slider" settings="slickConfig0" ng-if="slickConfig0Loaded">
+                    <div ng-repeat="i in series" ng-click="movie(i.series_id, 'series')">
+                        <div class="video-logo"><img src="assets/images/watch-icon.png"></div>
+                        <div class="video-logo-bottom"><img src="assets/images/watchit-icon2.png"></div>
+                        <div class="thumb-img">
+                            <img src="{{i.image}}">
+                        </div>
+                    </div>
+                </slick>
+                <!---End---->
+                <script type="text/ng-template" id="tpl-1">
+                    <img style="width: 100%;" src="{{k.image_thumb}}">
+                </script>
+                <div class="loop-angular" ng-repeat="i in movies_series" ng-if="i.series_list">
+                    <div class="slider-heading-bg" ng-click="view_all(i.series_id)">{{i.title}}<span ng-click="view_all(i.series_id)" class="pull-right">View All</span></div>
+                    <div class="slider-border">
+                        <slick class="slider" settings="slickConfig1" ng-if="slickConfig1Loaded">
+                            <div ng-if="i.series_list" ng-repeat="k in i.series_list" ng-click="movie(k.series_id, 'series')">
+                                <div class="thumb-img" ng-include="'tpl-1'"><img src="" /></div>
+                            </div>
+                        </slick>
+                    </div>
+                    <!---End---->
+                </div>
+
+
+        </main>
+        </div>
+
+    </div>
+    <!-- {{arrayText}} -->
+  
+    <style>
+        .slider-heading-bg1 {
+            width: 100%;
+            font-size: 18px;
+            color: #b61e37;
+            padding: 0 10px;
+            line-height: 40px;
+        }
+    </style>

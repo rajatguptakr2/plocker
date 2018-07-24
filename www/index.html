@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html ng-app="myApp">
+
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.googleapis.com https://graph.facebook.com">-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <!--Start Slider Css files-->
+    <link rel="stylesheet" href="assets/nav/angular-sidebarjs.css">
+    <link rel="stylesheet" href="assets/nav/demo.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/slider/slick.min.css">
+    <link rel="stylesheet" href="assets/slider/slick-theme.min.css">
+    <link rel="stylesheet" href="css/developer.css">
+    <!--End Slider Css files-->
+
+
+
+    <!--Start Css files-->
+    <link rel="stylesheet" type="text/css" href="assets/css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/layout-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/form.css">
+    <!--End Css files-->
+    <table>
+        <table>
+
+
+
+        </table>
+    </table>
+    <title>PLockApp</title>
+</head>
+
+<body>
+
+    <div class="loading-overlay hide">
+        <div class="loading" style="z-index: 9999;"></div>
+    </div>
+
+    <div class="modal-overlay">
+        <div class="modal-overlay-white">
+            <div class="close-icon closed"></div>
+            <div class="modal-header title"></div>
+            <div class="modal-body">
+                <p class="message"></p>
+            </div>
+            <div class="modal-footer">
+                <div class="inline-block-all">
+                    <div class="modal-close-confirm ok hide" ng-click="Response('true')"> Ok </div>
+                    <div class="modal-close closed" style="float: left; " ng-click="RedirectUrl()"> Close </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div ng-view></div>
+
+
+    <!-- Created On:- 05-07-2017 01.00PM, Created By :- Rajat Gupta -->
+
+
+    <!-- Start System Files -->
+    <script src="system/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="system/angular.js"></script>
+
+    <script type="text/javascript" src="system/lib/ng-cordova-oauth/dist/ng-cordova-oauth.js"></script>
+
+    <script type="text/javascript" src=""></script>
+    <script type="text/javascript" src="system/ng-cordova.js"></script>
+
+    <script type="text/javascript" src="system/ng-infinite-scroll.min.js"></script>
+    <script type="text/javascript" src="system/angular-touch.js"></script>
+    <script type="text/javascript" src="system/angular-cookies.js"></script>
+    <script type="text/javascript" src="system/angular-messages.js"></script>
+    <script type="text/javascript" src="system/angular-route.js"></script>
+    <script type="text/javascript" src="system/angular-sanitize.js"></script>
+
+    <script type="text/javascript" src="js/sha1.js"></script>
+
+
+
+    <script type="text/javascript" src="app.js"></script>
+
+
+
+    <!-- Start Map and geolocation Lib-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWeGmUCcJpj94rTTN2ctqfmPYNEEMeIJk&libraries=places"></script>
+    <!-- End Map and geolocation Lib-->
+
+    <!--Start Home Page Slider -->
+    <script src="assets/nav/angular-sidebarjs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
+    <script src="assets/slider/angular-slick.js"></script>
+    <!--End Home Page Slider -->
+
+
+    <!-- Start Module Files -->
+    <script type="text/javascript" src="module/splash/splash.js"></script>
+    <script type="text/javascript" src="module/lock/lock.js"></script>
+    <script type="text/javascript" src="module/list/list.js"></script>
+    <script type="text/javascript" src="module/sidemenu/sidemenu.js"></script>
+    <script type="text/javascript" src="module/home/home.js"></script>
+
+    <!-- End Module Files -->
+
+
+
+    <!-- Start Core Files -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <!-- End Core Files -->
+
+    <script>
+        var load = angular.element(document.querySelector('.loading-overlay'));
+        load.removeClass('hide').addClass('show');
+        //Used to handle pop-up alert message box
+        $('.closed').click(function () {
+            //$rootScope.ok.removeClass('show').addClass('hide');
+            $('.modal-overlay').removeClass('show').hide();
+            $('.ok').removeClass('show').hide();
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

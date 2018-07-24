@@ -1,0 +1,89 @@
+<!--<style>
+    .movie-info-right-right {
+
+        width: auto;
+    }
+
+    .movie-info-left {
+
+        font-size: 15px;
+    }
+
+    .movie-info-right-right h1 {
+        font-size: 9px;
+    }
+</style>-->
+<div ng-controller="movie_detail">
+    <header>
+        <div class="mob-lg-12 header-dark">
+            <div class="mob-display-table">
+                <div class="mob-display-cell" ng-click="home()"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                <div class="mob-display-cell"> Movie info & Trailer</div>
+            </div>
+        </div>
+    </header>
+    <section>
+     
+        <div class="movie-slider">
+            <div class="video-logo" ng-click="play_video(movie_data.movie_details.movie_id, 'movie', '1',movie_data.movie_details.movie_video)"><img src="assets/images/watch-icon.png" /></div>
+            <img src="{{movie_data.movie_details.banner_image}}" style="width:100%"> </div>
+
+
+        <div class="movie-info">
+            <div class="movie-info-left"> Movie info: </div>
+            <div class="movie-info-right">
+                <div class="movie-info-right-right">
+                    <h1>WATCH TRAILER </h1>
+                    <div class="go-field-btn center" ng-click="play_trailer(movie_data.movie_details.movie_id, 'movies', '2',movie_data.movie_details.trailer_video,movie_data.movie_details.banner_image)">
+                        <div class="go-btn"> GO </div>
+                    </div>
+                </div>
+
+
+                <div ng-if="!status" class="movie-info-right-right">
+                    <div class="go-field-btn center" ng-if="progresss[a][1] != movie_data.movie_details.movie_id">
+                        <h1>DOWNLOAD</h1>
+                        <div class="go-btn" ng-click="downloadinvoices(movie_data.movie_details.movie_id, 'movies',movie_data.movie_details.banner_image,movie_data.movie_details.movie_name)">
+                            GO</div>
+                    </div>
+                    <div class="go-field-btn center" ng-if="progresss[a][1] == movie_data.movie_details.movie_id">
+                        <h1>DOWNLOAD</h1>
+                        <div class="go-btn">
+                            {{progresss[a][4]| number : 0}}
+
+                        </div>
+                    </div>
+
+                </div>
+                <div ng-if="status" class="movie-info-right-right">
+                    <!-- <div class="movie-info-right-right"> -->
+                    <div class="go-field-btn center">
+                        <h1>DOWNLOADED</h1>
+                        <div class="go-btn">
+                            100%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-info-right-right" ng-click="home()">
+                    <h1> BACK </h1>
+                    <div class="go-field-btn center">
+                        <div class="go-btn"> GO </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="movie-container">
+            <div class="mob-lg-12">
+                <h1>Plot</h1>
+                <p>{{movie_data.movie_details.plot}}</p>
+                <h1> Cast </h1>
+                <p>{{movie_data.movie_details.cast}}</p>
+                <h1> Time Duration </h1>
+                <p>{{movie_data.movie_details.time_duration}} Hr</p>
+            </div>
+        </div>
+    </section>
+   
+</div>

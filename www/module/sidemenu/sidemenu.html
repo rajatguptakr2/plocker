@@ -1,0 +1,57 @@
+<div ng-controller="sidemenu">
+
+    <header>
+        <div class="mob-lg-12 header-dark">
+            <div class="mob-display-table">
+                <div class="mob-display-cell">
+                    <i class="fa fa-navicon material-icons" aria-hidden="true" sidebarjs-toggle></i>
+                </div>
+                <div class="mob-display-cell"> Locker
+                    <!-- <div class="search-bg-relative">
+                        <div class="search-btn">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                        <input type="text" ng-model='searchText' placeholder="Search" />
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--ng-include src="'module/sidemenu/search.html'"></ng-include-->
+    <sidebarjs>
+        <!-- ng-app="DemoApp"-->
+        <h3>
+            <img src="assets/images/logo.png" width="200" />
+        </h3>
+        <nav>
+            <div>
+                <a sidebarjs-toggle href="javascript:void(0)" ng-click="home('1')">
+                    <div class="img-watch">
+                        <i class="fa fa-film" aria-hidden="true"></i>
+                    </div>
+                    <div class="img-watch-text">Add Details</div>
+                </a>
+                <a sidebarjs-toggle href="javascript:void(0)" ng-click="home('2')">
+                    <div class="img-watch">
+                        <i class="fa fa-video-camera" aria-hidden="true"></i>
+                    </div>
+                    <div class="img-watch-text">List</div>
+                </a>
+                <a sidebarjs-toggle ng-click="myaccount()" href="javascript:void(0)">
+                    <div class="img-watch">
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                    </div>
+                    <div class="img-watch-text">Change Password</div>
+                </a>
+
+
+                <a sidebarjs-toggle ng-click="logout()" href="javascript:void(0)">
+                    <div class="img-watch">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    </div>
+                    <div class="img-watch-text">Logout</div>
+                </a>
+            </div>
+        </nav>
+    </sidebarjs>
+</div>

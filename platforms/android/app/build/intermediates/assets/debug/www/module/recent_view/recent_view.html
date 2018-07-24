@@ -1,0 +1,45 @@
+<div ng-controller="recent_view">
+    <header>
+        <div class="mob-lg-12 header-dark">
+            <div class="mob-display-table">
+                <div class="mob-display-cell" ng-click="home()"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                <div class="mob-display-cell">Watch List</div>
+            </div>
+        </div>
+    </header>
+    <section ng-init="recent_views()">
+	<div class="mob-lg-12">
+        <div ng-if="recent_list == ''">No Record Found</div>
+        <div class="watch-list">
+            <h1> What you've been watching </h1>
+            <ul>
+                <li ng-repeat="i in recent_list">
+                    
+                    <div class="watch-list-left" ng-if="type== 'series' " ng-click="movie(i.series_id, 'series')"> <img src="{{i.image_thumb}}"></div>
+                    <div class="watch-list-left" ng-if="type== 'movies' " ng-click="movie(i.id, 'movies')"> <img src="{{i.image_thumb}}"></div>
+                    <!--div class="watch-list-left"> <img src="{{i.image_thumb}}"></div-->
+                    <div class="watch-list-right">
+                        <div class="watch-list-right-top">
+                            <h1>CONTINUE WATCHING</h1>
+                            <div ng-if="type== 'series' " class="go-field-btn center" ng-click="movie(i.series_id, 'series')">
+                                <div class="go-btn-go"> <img width="30" src="assets/images/watch-icon.png"> </div>
+                            </div>
+                            <div ng-if="type== 'movies' " class="go-field-btn center" ng-click="movie(i.id, 'movies')">
+                                <div class="go-btn-go"> <img width="30" src="assets/images/watch-icon.png"> </div>
+                            </div>
+                        </div>
+                        <div class="watch-list-right-bottom">
+                            <h1>{{i.title}}</h1>
+                            <div class="watch-list-right-bottom-inner">
+                                <h2><span class="watch-list-date">Watch date :</span><span class="watch-list-date-text"> {{i.viewed_date}}</span></h2>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+		</div>
+    </section>
+</div>
+
+

@@ -1,0 +1,60 @@
+
+<div ng-controller="view_all">
+<header>
+    <div class="mob-lg-12 header-dark">
+        <div class="mob-display-table">
+            <div class="mob-display-cell" ng-click="go_back()"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+            <div class="mob-display-cell"> Continue Watching</div>
+        </div>
+    </div>
+</header>
+<div class="relative-search-list-bg" style="margin-top:0px; height:100vh;">   
+   <div ng-if="type=='movies'">
+         <div class="relative-top-heading-bg">
+            <span class="relative-top-heading-bg-left"> {{listing.category_name}} </span>
+            <!--<span class="relative-top-heading-bg-right"> View All </span>-->
+        </div>
+        <div class="relative-search-ul" ng-init="movie_by_category()">
+            <ul>
+                <li ng-repeat="mov in movies_list" infinite-scroll='movies_scroll(listing.total_page)' infinite-scroll-disabled='reddit.busy' infinite-scroll-distance='1' infinite-scroll-use-document-bottom="true" infinite-scroll-disabled='reddit.busy' infinite-scroll-distance='1' infinite-scroll-use-document-bottom="true"> 
+                    <div class="relative-search-ul-left" ng-click="movie(mov.movie_id, 'movies')"> 
+                        <img src="{{mov.image_thumb}}" />
+                    </div> 
+                    <div class="relative-search-ul-right" ng-click="movie(mov.movie_id, 'movies')">
+                        <h1> {{mov.movie_name}}</h1>
+                        <h2> {{mov.cast | limitTo:50}} </h2>
+                        <h2> {{mov.plot  | limitTo:50}} </h2>
+                        <!--<h2> {{mov.time_duration}} Hr.</h2>-->
+                    </div> 
+                </li>
+            </ul>
+        </div>
+   </div>
+   <div ng-if="type=='series'">
+         <div class="relative-top-heading-bg">
+            <span class="relative-top-heading-bg-left"> {{movies_series.title}} </span>
+            <!--<span class="relative-top-heading-bg-right"> View All </span>-->
+        </div>
+        <div class="relative-search-ul" ng-init="movie_by_category()">
+            <ul>
+                <li ng-repeat="i in series_list" infinite-scroll='series_scroll(movies_series.total_page)' infinite-scroll-disabled='reddit.busy' infinite-scroll-distance='1' infinite-scroll-use-document-bottom="true"> 
+                    <div class="relative-search-ul-left" ng-click="play_video(i.series_id,i.id,'series')"> 
+                        <img src="{{i.image}}" />
+                    </div> 
+                  
+                    <div class="relative-search-ul-right" ng-click="play_video(i.series_id,i.id,'series')">
+                        <h1> {{i.title}}</h1>
+                        <h2> Season {{i.season}} </h2>
+                        <h2> Episode {{i.episode}}: {{i.description}}: - Version 1 </h2>
+                    </div> 
+                </li>
+            </ul>
+        </div>
+   </div>
+</div>
+</div>
+
+
+<!-- end search -->
+
+ 

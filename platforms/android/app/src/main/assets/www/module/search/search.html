@@ -1,0 +1,108 @@
+<div class="search-for-top-input" ng-controller="search">
+    <div id="search_for" class="search_for">
+        <div class="relative-search">
+            <!--form name="userForm" ng-submit="result(search_word)" method="post"  novalidate >
+                 <span class="relative-search-left"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+                <input type="search"  id="newbarcode" value="{{search_key}}" ng-model="search_word"  maxlength="100" style="color:#000" ng-keyup="search()" name="search_word" placeholder="Search by Product Name or Scan a Barcode" autocomplete="off"/>
+                <i class="ion-chevron-left arrow-searchs" ng-click="close_div()"></i>
+               
+            </form-->
+            <span class="relative-search-left" ng-click="back()">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </span>
+            <input type="search" autofocus id="search_word" value="{{search_key}}" ng-model="search_word" maxlength="100" style="color:#000"
+                ng-change="search_keyword(search_word)" name="search_word" placeholder="Start Searching..." autocomplete="off"
+            />
+
+            <i class="ion-chevron-left arrow-searchs" ng-click="close_div()"></i>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <div class="relative-search-list-bg" ng-if="count == '0'">
+        <div class="relative-top-heading-bg">
+            <span class="relative-top-heading-bg-left"> No record found </span>
+            <!--<span class="relative-top-heading-bg-right"> View All </span>-->
+        </div>
+    </div>
+
+    <!-- <div class="recent" ng-if="type_recent == 'recent_search_keyword'">
+        <h1>Recent</h1>
+        <ul>
+            <li ng-repeat="(key,ii) in recent_search_data | orderBy:-key : reverse : key | limitTo:20   " ng-click="search_type(ii.indx)">{{ii.indx}}</li>
+        </ul>
+    </div> -->
+    
+
+    <script>
+        $(document).on('click', '.recent ul li', function () {
+            $("#search_word").val($(this).html());
+            $("hit_search").trigger('click');
+        });
+    </script>
+    <div ng-if="type == 'movies'" style="margin-top:20px;">
+        <div class="repeat-movie" ng-repeat="mov in listing" ng-if="mov.movie_list">
+            <div class="relative-search-list-bg1">
+                <div class="relative-top-heading-bg">
+                    <span class="relative-top-heading-bg-left"> {{mov.cat_name}} </span>
+                    <!--<span class="relative-top-heading-bg-right"> View All </span>-->
+                </div>
+                <div class="relative-search-ul">
+                    <ul>
+                        <li ng-repeat="mov in mov.movie_list" ng-click="movie(mov.movie_id, 'movies')">
+                            <div class="relative-search-ul-left">
+                                <img src="{{mov.image_thumb}}" />
+                            </div>
+                            <div class="relative-search-ul-right">
+                                <h1> {{mov.movie_name}}</h1>
+                                <h2> {{mov.cast | limitTo:20}} </h2>
+                                <h2> {{mov.plot | limitTo:20}} </h2>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--<div class="relative-search-list-bg" ng-if="listing.length == count" >   
+            <div class="relative-top-heading-bg">
+                <span class="relative-top-heading-bg-left"> No record found </span>
+            </div>
+        </div>-->
+    </div>
+    <div ng-if="type == 'series'" style="margin-top:20px;">
+        <div class="repeat-movie" ng-repeat="mov in listing" ng-if="mov.series_list" ng-click="movie(mov.series_id, 'series')">
+            <div class="relative-search-list-bg1">
+                <div class="relative-top-heading-bg">
+                    <span class="relative-top-heading-bg-left"> {{mov.title}} </span>
+                    <!--<span class="relative-top-heading-bg-right"> View All </span>-->
+                </div>
+                <div class="relative-search-ul">
+                    <ul>
+                        <li ng-repeat="ser in mov.series_list">
+                            <div class="relative-search-ul-left">
+                                <img src="{{ser.image}}" />
+                            </div>
+                            <div class="relative-search-ul-right">
+                                <h1> {{ser.title}}</h1>
+                                <h2> Episode: {{ser.episode}}, Season: {{ser.season}}</h2>
+                                <h2> {{ser.time_duration}} Hr.</h2>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div id="blank"></div>
+
+<!-- end search -->

@@ -1,0 +1,115 @@
+<div ng-controller="login" ng-init="dataconnection()">
+    <form method="post" name="collectcity" class="form-label" novalidate>
+        <div class="modal-overlay getcity">
+            <div class="modal-overlay-white">
+                <div class="close-icon" ng-click="icon_close()"></div>
+                <div class="modal-header title">Info</div>
+                <div class="modal-body" style="height:250px; overflow:auto;">
+                    <!--style="height:250px; overflow:auto;"-->
+                    <div id="errormsg" style="color:red;     font-size: 13px;"></div>
+                    <br>
+                    <div class="group">
+                        <select type="select" ng-model="country_id" ng-init="country_id" name="country_id" ng-change="getcity(country_id)" class="custom-select"
+                            required>
+                            <option value="">Select Country</option>
+                            <option  value="{{x.country_id}}" ng-repeat="x in country"> {{x.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="group">
+                        <select type="select" ng-model="city_id" ng-init="city_id" name="city_id" class="custom-select-gray" required>
+                            <option value="">Select City</option>
+                            <option  value="{{x.city_id}}" ng-repeat="x in city"> {{x.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="group">
+                        <select type="select" ng-model="interest.interest_id[0]" ng-init="interest_id1" name="interest_id[]" class="custom-select">
+                            <option value="">Select Interest 1</option>
+                            <option  value="{{x.interest_id}}" ng-repeat="x in interests"> {{x.name}}</option>
+                        </select>
+                    </div>
+                    <div class="group">
+                        <select type="select" ng-model="interest.interest_id[1]" ng-init="interest_id2" name="interest_id[]" class="custom-select-gray">
+                            <option value="">Select Interest 2</option>
+                            <option  value="{{x.interest_id}}" ng-repeat="x in interests"> {{x.name}}</option>
+                        </select>
+                    </div>
+                    <div class="group">
+                        <select type="select" ng-model="interest.interest_id[2]" ng-init="interest_id3" name="interest_id[]" class="custom-select">
+                            <option value="">Select Interest 3</option>
+                            <option  value="{{x.interest_id}}" ng-repeat="x in interests"> {{x.name}}</option>
+                        </select>
+                    </div>
+                    <div class="group">
+                        <select type="select" ng-model="interest.interest_id[3]" ng-init="interest_id4" name="interest_id[]" class="custom-select-gray">
+                            <option value="">Select Interest 4</option>
+                            <option  value="{{x.interest_id}}" ng-repeat="x in interests"> {{x.name}}</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-close" ng-click="social_login('collectcity')"> Save </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="login-relative">
+        <article>
+            <div class="mob-lg-12 login-logo"><img src="assets/images/logo.png" /> </div>
+        </article>
+        <article>
+            <div class="mob-lg-12">
+                <form method="post" name="loginform" novalidate>
+                    <div class="floating-labels">
+                        <div class="group">
+                            <input type="email" name="email_id" validate-email ng-model="email_id" maxlength="70" class="inputMaterial" required autocomplete="off"
+                            />
+                            <span class="highlight"></span> <span class="bar"></span>
+                            <label>Your Email</label>
+                        </div>
+
+                        <div class="group">
+                            <input type="password" name="password" ng-model="password" maxlength="50" class="inputMaterial" required autocomplete="off"
+                            />
+                            <span class="highlight"></span> <span class="bar"></span>
+                            <label>Your Password </label>
+                        </div>
+                    </div>
+                    <div class="input-field-one">
+                        <div class="login-lg-5">
+                            <label>
+                                <input type="checkbox" name="rememberme" ng-model="rememberme"/>
+                                Remember Me </label>
+                        </div>
+                        <div ng-bind-html="myHTML" class="listTable"></div>
+                        {{details}}
+                        <div class="login-lg-7" ng-click="forgot()"> Forgot Password?</div>
+                    </div>
+                    <div class="input-field">
+                        <button class="background-pink" ng-click="login('loginform')">Login </button>
+                    </div>
+                </form>
+                <div class="input-field">
+                    <button class="btn-gray" ng-click="reg()">Sign Up </button>
+                </div>
+                <div class="input-field-or"> <span> OR </span> </div>
+            </div>
+
+            <div class="wrp">
+                <a class="icon icon-twitter" ng-click="social('1')">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icon icon-facebook" ng-click="social('2')">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="icon icon-instagram" ng-click="social('3')">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </a>
+            </div>
+        </article>
+    </div>
+    <div class="login-fixed"> <img src="{{abc.result.back_ground_image}}" width="100%" height="100%" /> </div>
+</div>

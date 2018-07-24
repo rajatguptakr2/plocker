@@ -1,0 +1,30 @@
+<form ng-controller="validateCtrl" name="myTestForm" ng-submit="submitForm(myTestForm.$valid)" novalidate>
+    <p>Username:<br />
+        <input type="text" name="username" ng-model="username" required><br />
+        <!--<span style="color:red" ng-show="myTestForm.username.$dirty && myTestForm.username.$invalid">
+            <span ng-show="myTestForm.username.$error.required">Username is required.</span>
+        </span>-->
+    </p>
+
+    <p>Phone:<br />
+        <input type="text" name="phone" ng-model="phone" ng-minlength="10" ng-model-options="{updateOn: 'blur'}" ng-pattern="/^[0-9]+$/" required><br />
+        <!--<span style="color:red" ng-show="myTestForm.phone.$dirty && myTestForm.phone.$invalid">
+            <span ng-show="myTestForm.phone.$error.required">Phone is required.</span>
+            <span ng-show="myTestForm.phone.$error.pattern">Phone must be numeric.</span>
+            <span ng-show="myTestForm.phone.$error.minlength">Phone must be min 10 char.</span>
+        </span>-->
+    </p>
+
+    <p>Email:<br />
+        <input type="email" name="email" ng-model="email" ng-model-options="{updateOn: 'blur'}" required><br />
+        <!--<span style="color:red" ng-show="myTestForm.email.$dirty && myTestForm.email.$invalid">
+            <span ng-show="myTestForm.email.$error.required">Email is required.</span>
+            <span ng-show="myTestForm.email.$error.email">Invalid email address.</span>
+        </span>-->
+    </p>
+
+    <p>
+        <input type="submit" value="Submit" >
+        <!--ng-disabled="myTestForm.phone.$dirty && myTestForm.phone.$invalid || myTestForm.username.$dirty && myTestForm.username.$invalid || myTestForm.email.$dirty && myTestForm.email.$invalid"-->
+    </p>
+</form>

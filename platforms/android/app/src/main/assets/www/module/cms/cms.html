@@ -1,0 +1,25 @@
+<div ng-controller="cms" ng-init="get_cms_data()">
+<header>
+    <div class="mob-lg-12 header-dark">
+        <div class="mob-display-table">
+            <div class="mob-display-cell" ng-click="go_back()"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+            <div class="mob-display-cell"> {{cms_data.title}} </div>
+        </div>
+    </div>
+</header>
+<div class="relative-search-list-bg" style="margin-top:0px;">   
+    <div class="relative-top-heading-bg">
+        <span class="relative-top-heading-bg-left">  </span>
+         {{cms_data}}
+        <!--<span class="relative-top-heading-bg-right"> View All </span>-->
+    </div>
+    <div class="relative-search-ul">
+       
+    </div>
+</div>
+</div>
+
+
+<!-- end search -->
+
+ 

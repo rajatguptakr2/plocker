@@ -1,0 +1,17 @@
+<style>
+body{    padding: 0 0 0 0 !important;}
+</style>
+<div ng-controller="splash">
+    <div class="splash-relative" ng-click="splash()">
+        <div class="logo-splash"> 
+            <img src="assets/images/logo-splash.png" width="280" height="275">
+        </div>
+    </div>
+</div>
+<script>
+	$(function(){
+		setTimeout(function(){
+			$(".logo-splash").trigger('click');
+		},3000);
+	});
+</script>
