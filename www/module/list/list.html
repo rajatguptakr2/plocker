@@ -1,4 +1,4 @@
-<div ng-controller="list">
+<div ng-controller="list" ng-init="listItem()">
 
     <div ng-include="'module/sidemenu/sidemenu.html'"></div>
     <div style="margin-top:20px;">
@@ -8,6 +8,7 @@
             </div>
             <input type="text" ng-model='searchText' placeholder="Search" />
         </div>
+        {{listing}}
         <div class="repeat-movie" ng-repeat="mov in listing | filter:searchText" ng-click="readAll(mov.id)">
             <div class="relative-search-list-bg1">
                 <div class="relative-top-heading-bg list_part">

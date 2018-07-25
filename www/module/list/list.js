@@ -13,39 +13,51 @@ app.controller('list', function($scope, $http, $location, $cookieStore, $timeout
         $location.path('/view');
     }
 
-
-    $scope.type = 'movies';
     $scope.listing = [
         { id: '1', name: 'John' },
         { id: '2', name: 'Ankit' },
 
     ];
-    var db;
-    var request = window.indexedDB.open("newDatabase", 1);
-    request.onerror = function(event) {
-        alert("error: ");
-    };
 
-    request.onsuccess = function(event) {
-        db = request.result;
-        console.log("success: " + db);
-    };
+    var arrayText = [];
+    $scope.type = 'movies';
+    $scope.listItem = function() {
 
-    $scope.readAll = function() {
+        var db;
+        var request = window.indexedDB.open("newDatabase", 1);
 
-        var objectStore = db.transaction("employee").objectStore("employee");
-
-        objectStore.openCursor().onsuccess = function(event) {
-            var cursor = event.target.result;
-            console.log(event);
-            if (cursor) {
-                $scope.listing = cursor;
-                // alert("Name for id " + cursor.key + " is " + cursor.value.name + ", Age: " + cursor.value.age + ", Email: " + cursor.value.email);
-                cursor.continue();
-            } else {
-                alert("No more entries!");
-            }
+        request.onerror = function(event) {
+            alert("error: ");
         };
+
+        request.onsuccess = function(event) {
+            db = request.result;
+            console.log("success: " + db);
+        };
+
+
+        $scope.readAll = function() {
+
+            var objectStore = db.transaction("employee").objectStore("employee");
+
+            objectStore.openCursor().onsuccess = function(event) {
+                var cursor = event.target.result;
+
+                if (cursor) {
+                    arrayText.push(cursor.value);
+                    // alert("Name for id " + cursor.key + " is " + cursor.value.name + ", Age: " + cursor.value.age + ", Email: " + cursor.value.email);
+                    cursor.continue();
+                } else {
+                    alert("No more entries!");
+                }
+            };
+            console.log(arrayText);
+            $scope.listing = arrayText;
+            $scope.listItem();
+        }
+
+
+
     }
 
     // setTimeout(function() {
@@ -60,4 +72,4 @@ app.controller('list', function($scope, $http, $location, $cookieStore, $timeout
     }
 
 
-});
+});;
