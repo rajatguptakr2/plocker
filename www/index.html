@@ -131,7 +131,7 @@
     <script type="text/javascript" src="module/lock/lock.js"></script>
     <script type="text/javascript" src="module/list/list.js"></script>
     <script type="text/javascript" src="module/sidemenu/sidemenu.js"></script>
-    <script type="text/javascript" src="module/home/home.js"></script>
+    <script type="text/javascript" src="module/view/view.js"></script>
 
     <!-- End Module Files -->
 
@@ -146,16 +146,11 @@
         var load = angular.element(document.querySelector('.loading-overlay'));
         load.removeClass('hide').addClass('show');
         //Used to handle pop-up alert message box
-        $('.closed').click(function () {
+        $('.closed').click(function() {
             //$rootScope.ok.removeClass('show').addClass('hide');
             $('.modal-overlay').removeClass('show').hide();
             $('.ok').removeClass('show').hide();
         });
-
-
-
-
-
     </script>
 
 </body>

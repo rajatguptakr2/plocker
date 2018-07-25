@@ -4,14 +4,13 @@ var api_key = '0ed2e4b57d1f837276553b00d3fc2a29';
 
 var storage = window.localStorage;
 
-var app = angular.module("myApp", ['ngRoute', 'ngSanitize', 'ngCookies', 'slickCarousel', 'ngSidebarJS', 'ngCordova', 'com.2fdevs.videogular', 'com.2fdevs.videogular.plugins.controls', 'com.2fdevs.videogular.plugins.overlayplay', 'com.2fdevs.videogular.plugins.poster', 'com.2fdevs.videogular.plugins.buffering', 'infinite-scroll', 'ngCordovaOauth', 'ngCordova']);
-//app.constant("CSRF_TOKEN", '40d3dfd36e217abcade403b73789d732');         //{!! csrf_token() !!}
+var app = angular.module("myApp", ['ngRoute', 'ngSanitize', 'ngCookies', 'ngSidebarJS', 'ngCordova', 'infinite-scroll', 'ngCordovaOauth', 'ngCordova']);
 
 var currentUrl = '';
 
 //Detect the Current Path
-app.run(['$rootScope', '$location', '$routeParams', function ($rootScope, $location, $routeParams, $cookieStore) {
-    $rootScope.$on('$routeChangeSuccess', function (e, current, pre) {
+app.run(['$rootScope', '$location', '$routeParams', function($rootScope, $location, $routeParams, $cookieStore) {
+    $rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
         currentUrl = $location.path();
 
     });
@@ -22,7 +21,7 @@ app.run(['$rootScope', '$location', '$routeParams', function ($rootScope, $locat
 
 var ress;
 //Check the background page image from live path, every time the page is loaded
-app.run(function ($q, $http, $rootScope, $location, $interval, $cordovaToast, loading, model) {
+app.run(function($q, $http, $rootScope, $location, $interval, $cordovaToast, loading, model) {
 
     var act = window.console.log();
 
@@ -60,100 +59,21 @@ app.run(function ($q, $http, $rootScope, $location, $interval, $cordovaToast, lo
     var resolvedValue;
     $rootScope.abc = '';
 
-    $rootScope.AppBackgroungImage = function (a) {
+    $rootScope.AppBackgroungImage = function(a) {
 
-        // loading.active();
-        var args = $.param({});
-
-        var ress = $http({
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            method: 'POST',
-            url: app_url + 'webservices/get_bgimage',
-            data: args //forms user object
-
-        }).then(function (response) {
-            res = response;
-            loading.deactive();
-            if (res.data.responseCode == '200') {
-
-                ress = res.data.data;
-                $rootScope.abc = res.data.data;
-
-            } else {
-                $rootScope.abc = 'assets/images/logo.png';//res.data.responseCode;
-
-            }
-        });
-
+        $rootScope.abc = 'assets/images/background.jpg'; //res.data.responseCode;
     }
+
+    $rootScope.userNavigation = function() {
+        window.history.back()
+    }
+
 
     $rootScope.AppBackgroungImage();
 });
 
-//Redirection from Online App To Offline Page and So on
-app.run(function ($rootScope, $location, $interval, $cordovaToast) {
-
-    // //alert(currentUrl.split('/')[1]);
-    var myVar = '';
-    currentUrl = $location.path().split('/')[1];
-    $rootScope.currentUrl = $location.url().split('/')[1];
-
-    $rootScope.userNavigation = function () {
-        window.history.back()
-    }
-
-    $rootScope.RedirectOffline = function () {
-
-        var ChangeRoute = currentUrl.split('/')[1];
-        if (ChangeRoute == 'offline' || ChangeRoute == 'playoffline') {
-
-            $rootScope.StatusMessage('No Internet Connection');
-            $interval.cancel(myVar);
-
-        } else {
-
-            $location.path('/offline');
-            ////alert('Checked');
-        }
-    }
-
-    $rootScope.DeletedRecord = [];
-    $rootScope.checkconnection = function () {
-
-        if (navigator.connection.type == 'none') {
-            $rootScope.RedirectOffline();
-        } else {
-            // clearInterval(myVar);
-        }
-    }
-
-    $rootScope.TimeOutConnection = function (status) {
-        currentUrl = $location.path().split('/')[1];
-
-        if (status == 'enable') {
-            myVar = $interval(function () {
-
-                $rootScope.checkconnection();
-
-                if (currentUrl == '/login' || currentUrl == '/forgot' || currentUrl == '/after_login') {
-
-                    $rootScope.AppBackgroungImage();
-                }
-
-            }, 3000); //5 Sec timeStamp
-        }
-
-    }
-
-
-    $rootScope.TimeOutConnection('enable');
-});
-
-
 //App Routing Configuration 
-app.config(function ($routeProvider, $httpProvider) {
+app.config(function($routeProvider, $httpProvider) {
     // $httpProvider.interceptors.push('timestampMarker');
 
     $routeProvider
@@ -162,20 +82,28 @@ app.config(function ($routeProvider, $httpProvider) {
         })
         .when("/splash", {
             templateUrl: "module/splash/splash.html"
+        }).when("/lock", {
+            templateUrl: "module/lock/lock.html"
+        }).when("/list", {
+            templateUrl: "module/list/list.html"
+        }).when("/home", {
+            templateUrl: "module/home/home.html"
+        }).when("/view", {
+            templateUrl: "module/view/view.html"
         });
 
 
 });
 
 //Loading service for loading image , show and hide at a time using service  param
-app.service('loading', function () {
+app.service('loading', function() {
 
     var process = {};
     var load = angular.element(document.querySelector('.loading-overlay'));
-    process.active = function () {
+    process.active = function() {
         return load.removeClass('hide').addClass('show');
     };
-    process.deactive = function () {
+    process.deactive = function() {
         return load.removeClass('show').addClass('hide');
     };
 
@@ -184,7 +112,7 @@ app.service('loading', function () {
 });
 
 //Conditional model box to give the redirect url where we want to redirec after click OK
-app.service('model', ['$rootScope', '$location', function ($rootScope, $location) {
+app.service('model', ['$rootScope', '$location', function($rootScope, $location) {
     //////alert(window.location.path('/' + 'home'));
     var process = {};
     var url = '';
@@ -195,7 +123,7 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
     var CloseMark = angular.element(document.querySelector('.close-icon'));
     $rootScope.ok = angular.element(document.querySelector('.ok'));
 
-    $rootScope.RedirectUrl = function () {
+    $rootScope.RedirectUrl = function() {
         load.removeClass('show').addClass('hide');
         // if (url != '') {
 
@@ -205,7 +133,7 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
         // }
     }
 
-    process.show = function (a, b) {
+    process.show = function(a, b) {
 
         if (typeof b === 'string') {
             var j = b.toLowerCase();
@@ -227,7 +155,7 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
         return load.removeClass('hide').addClass('show');
     };
     // It helps to redirect the page onclick of close button 
-    process.ShowRedirectUrl = function (a, b, redirect) {
+    process.ShowRedirectUrl = function(a, b, redirect) {
 
         if (typeof b === 'string') {
             var j = b.toLowerCase();
@@ -251,14 +179,14 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
         return load.removeClass('hide').addClass('show');
 
     };
-    process.ConfirmBox = function (a, b) {
-        title.html(a);    // title 
-        message.html(b);  //message for box
+    process.ConfirmBox = function(a, b) {
+        title.html(a); // title 
+        message.html(b); //message for box
         $rootScope.ok.removeClass('hide').addClass('show'); //enable the Ok button
         return load.removeClass('hide').addClass('show');
 
     };
-    process.hide = function () {
+    process.hide = function() {
         return load.removeClass('show').addClass('hide');
     };
 
@@ -270,29 +198,29 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
 
 
 
-app.directive('validateEmail', function () {
+app.directive('validateEmail', function() {
     var EMAIL_REGEXP = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
 
     return {
         require: 'ngModel',
         restrict: '',
-        link: function (scope, elm, attrs, ctrl) {
+        link: function(scope, elm, attrs, ctrl) {
             // only apply the validator if ngModel is present and Angular has added the email validator
             if (ctrl && ctrl.$validators.email) {
 
                 // this will overwrite the default Angular email validator
-                ctrl.$validators.email = function (modelValue) {
+                ctrl.$validators.email = function(modelValue) {
                     return ctrl.$isEmpty(modelValue) || EMAIL_REGEXP.test(modelValue);
                 };
             }
         }
     };
 });
-app.directive('onlyDigits', function () {
+app.directive('onlyDigits', function() {
     return {
         require: 'ngModel',
         restrict: 'A',
-        link: function (scope, element, attr, ctrl) {
+        link: function(scope, element, attr, ctrl) {
             function inputValue(val) {
                 if (val) {
                     var digits = val.replace(/[^0-9]/g, '');
@@ -309,15 +237,15 @@ app.directive('onlyDigits', function () {
         }
     };
 });
-app.directive('validNumber', function () {
+app.directive('validNumber', function() {
     return {
         require: '?ngModel',
-        link: function (scope, element, attrs, ngModelCtrl) {
+        link: function(scope, element, attrs, ngModelCtrl) {
             if (!ngModelCtrl) {
                 return;
             }
 
-            ngModelCtrl.$parsers.push(function (val) {
+            ngModelCtrl.$parsers.push(function(val) {
                 if (angular.isUndefined(val)) {
                     var val = '';
                 }
@@ -329,7 +257,7 @@ app.directive('validNumber', function () {
                 return clean;
             });
 
-            element.bind('keypress', function (event) {
+            element.bind('keypress', function(event) {
                 if (event.keyCode === 32) {
                     event.preventDefault();
                 }
@@ -339,13 +267,13 @@ app.directive('validNumber', function () {
 });
 
 
-app.directive('pwCheck', [function () {
+app.directive('pwCheck', [function() {
     return {
         require: 'ngModel',
-        link: function (scope, elem, attrs, ctrl) {
+        link: function(scope, elem, attrs, ctrl) {
             var firstPassword = '#' + attrs.pwCheck;
-            elem.add(firstPassword).on('keyup', function () {
-                scope.$apply(function () {
+            elem.add(firstPassword).on('keyup', function() {
+                scope.$apply(function() {
                     var v = elem.val() === $(firstPassword).val();
                     ctrl.$setValidity('pwmatch', v);
                 });
@@ -354,8 +282,92 @@ app.directive('pwCheck', [function () {
     }
 }]);
 
-app.filter('capitalize', function () {
-    return function (input) {
+app.filter('capitalize', function() {
+    return function(input) {
         return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
     }
 });
+
+
+
+//Conditional model box to give the redirect url where we want to redirec after click OK
+app.service('model', ['$rootScope', '$location', function($rootScope, $location) {
+    //////alert(window.location.path('/' + 'home'));
+    var process = {};
+    var url = '';
+    var load = angular.element(document.querySelector('.modal-overlay'));
+    $rootScope.load = angular.element(document.querySelector('.modal-overlay'));
+    var title = angular.element(document.querySelector('.title'));
+    var message = angular.element(document.querySelector('.message'));
+    var CloseMark = angular.element(document.querySelector('.close-icon'));
+    $rootScope.ok = angular.element(document.querySelector('.ok'));
+
+    $rootScope.RedirectUrl = function() {
+        load.removeClass('show').addClass('hide');
+        // if (url != '') {
+
+        //     $location.path('/' + url);
+        // } else {
+        //     load.removeClass('show').addClass('hide');
+        // }
+    }
+
+    process.show = function(a, b) {
+
+        if (typeof b === 'string') {
+            var j = b.toLowerCase();
+
+            var a = j.indexOf("successfully");
+            var d = j.indexOf("successful");
+            var c = j.indexOf("success");
+            // console.log(c)
+            if (a >= 0 || d >= 0 || c >= 0) {
+                title.html('Info');
+                message.html(b);
+            } else {
+                title.html('Alert');
+                message.html(b);
+            }
+
+        }
+
+        return load.removeClass('hide').addClass('show');
+    };
+    // It helps to redirect the page onclick of close button 
+    process.ShowRedirectUrl = function(a, b, redirect) {
+
+        if (typeof b === 'string') {
+            var j = b.toLowerCase();
+
+            var a = j.indexOf("successfully");
+            var d = j.indexOf("successful");
+            var c = j.indexOf("success");
+            // console.log(c)
+            if (a >= 0 || d >= 0 || c >= 0) {
+                title.html('Info');
+                message.html(b);
+            } else {
+                title.html('Alert');
+                message.html(b);
+            }
+
+        }
+
+        url = redirect;
+        CloseMark.addClass('hide');
+        return load.removeClass('hide').addClass('show');
+
+    };
+    process.ConfirmBox = function(a, b) {
+        title.html(a); // title 
+        message.html(b); //message for box
+        $rootScope.ok.removeClass('hide').addClass('show'); //enable the Ok button
+        return load.removeClass('hide').addClass('show');
+
+    };
+    process.hide = function() {
+        return load.removeClass('show').addClass('hide');
+    };
+
+    return process;
+}]);

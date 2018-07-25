@@ -9,8 +9,8 @@ var app = angular.module("myApp", ['ngRoute', 'ngSanitize', 'ngCookies', 'ngSide
 var currentUrl = '';
 
 //Detect the Current Path
-app.run(['$rootScope', '$location', '$routeParams', function ($rootScope, $location, $routeParams, $cookieStore) {
-    $rootScope.$on('$routeChangeSuccess', function (e, current, pre) {
+app.run(['$rootScope', '$location', '$routeParams', function($rootScope, $location, $routeParams, $cookieStore) {
+    $rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
         currentUrl = $location.path();
 
     });
@@ -21,7 +21,7 @@ app.run(['$rootScope', '$location', '$routeParams', function ($rootScope, $locat
 
 var ress;
 //Check the background page image from live path, every time the page is loaded
-app.run(function ($q, $http, $rootScope, $location, $interval, $cordovaToast, loading, model) {
+app.run(function($q, $http, $rootScope, $location, $interval, $cordovaToast, loading, model) {
 
     var act = window.console.log();
 
@@ -59,21 +59,112 @@ app.run(function ($q, $http, $rootScope, $location, $interval, $cordovaToast, lo
     var resolvedValue;
     $rootScope.abc = '';
 
-    $rootScope.AppBackgroungImage = function (a) {
+    $rootScope.AppBackgroungImage = function(a) {
 
-        $rootScope.abc = 'assets/images/background.jpg';//res.data.responseCode;
+        $rootScope.abc = 'assets/images/background.jpg'; //res.data.responseCode;
     }
 
-    $rootScope.userNavigation = function () {
+    $rootScope.userNavigation = function() {
         window.history.back()
     }
 
 
     $rootScope.AppBackgroungImage();
+
+    //prefixes of implementation that we want to test
+    window.indexedDB = window.indexedDB || window.mozIndexedDB ||
+        window.webkitIndexedDB || window.msIndexedDB;
+
+    //prefixes of window.IDB objects
+    window.IDBTransaction = window.IDBTransaction ||
+        window.webkitIDBTransaction || window.msIDBTransaction;
+    window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange ||
+        window.msIDBKeyRange
+
+    if (!window.indexedDB) {
+        window.alert("Your browser doesn't support a stable version of IndexedDB.")
+    }
+
+    const employeeData = [
+        { id: "01", name: "Gopal K Varma", age: 35, email: "contact@tutorialspoint.com" },
+        { id: "02", name: "Prasad", age: 24, email: "prasad@tutorialspoint.com" }
+    ];
+
+    var db;
+    var request = window.indexedDB.open("newDatabase", 1);
+
+    request.onerror = function(event) {
+        alert("error: ");
+    };
+
+    request.onsuccess = function(event) {
+        db = request.result;
+        console.log("success: " + db);
+    };
+
+    request.onupgradeneeded = function(event) {
+        var db = event.target.result;
+        var objectStore = db.createObjectStore("employee", { keyPath: "id" });
+
+        for (var i in employeeData) {
+            objectStore.add(employeeData[i]);
+        }
+    }
+
+    function read() {
+        var transaction = db.transaction(["employee"]);
+        var objectStore = transaction.objectStore("employee");
+        var request = objectStore.get("00-03");
+
+        request.onerror = function(event) {
+            alert("Unable to retrieve daa from database!");
+        };
+
+        request.onsuccess = function(event) {
+            // Do something with the request.result!
+            if (request.result) {
+                alert("Name: " + request.result.name + ", Age: " + request.result.age + ", Email: " + request.result.email);
+            } else {
+                alert("Kenny couldn't be found in your database!");
+            }
+        };
+    }
+
+    // function readAll() {
+
+
+
+    // }
+
+    function add() {
+        var request = db.transaction(["employee"], "readwrite")
+            .objectStore("employee")
+            .add({ id: "03", name: "Kenny", age: 19, email: "kenny@planet.org" });
+
+        request.onsuccess = function(event) {
+            alert("Kenny has been added to your database.");
+        };
+
+        request.onerror = function(event) {
+            alert("Unable to add data\r\nKenny is aready exist in your database! ");
+        }
+    }
+
+    function remove() {
+        var request = db.transaction(["employee"], "readwrite")
+            .objectStore("employee")
+            .delete("00-03");
+
+        request.onsuccess = function(event) {
+            alert("Kenny's entry has been removed from your database.");
+        };
+    }
+
+
 });
 
 //App Routing Configuration 
-app.config(function ($routeProvider, $httpProvider) {
+app.config(function($routeProvider, $httpProvider) {
     // $httpProvider.interceptors.push('timestampMarker');
 
     $routeProvider
@@ -88,20 +179,22 @@ app.config(function ($routeProvider, $httpProvider) {
             templateUrl: "module/list/list.html"
         }).when("/home", {
             templateUrl: "module/home/home.html"
+        }).when("/view", {
+            templateUrl: "module/view/view.html"
         });
 
 
 });
 
 //Loading service for loading image , show and hide at a time using service  param
-app.service('loading', function () {
+app.service('loading', function() {
 
     var process = {};
     var load = angular.element(document.querySelector('.loading-overlay'));
-    process.active = function () {
+    process.active = function() {
         return load.removeClass('hide').addClass('show');
     };
-    process.deactive = function () {
+    process.deactive = function() {
         return load.removeClass('show').addClass('hide');
     };
 
@@ -110,7 +203,7 @@ app.service('loading', function () {
 });
 
 //Conditional model box to give the redirect url where we want to redirec after click OK
-app.service('model', ['$rootScope', '$location', function ($rootScope, $location) {
+app.service('model', ['$rootScope', '$location', function($rootScope, $location) {
     //////alert(window.location.path('/' + 'home'));
     var process = {};
     var url = '';
@@ -121,7 +214,7 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
     var CloseMark = angular.element(document.querySelector('.close-icon'));
     $rootScope.ok = angular.element(document.querySelector('.ok'));
 
-    $rootScope.RedirectUrl = function () {
+    $rootScope.RedirectUrl = function() {
         load.removeClass('show').addClass('hide');
         // if (url != '') {
 
@@ -131,7 +224,7 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
         // }
     }
 
-    process.show = function (a, b) {
+    process.show = function(a, b) {
 
         if (typeof b === 'string') {
             var j = b.toLowerCase();
@@ -153,7 +246,7 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
         return load.removeClass('hide').addClass('show');
     };
     // It helps to redirect the page onclick of close button 
-    process.ShowRedirectUrl = function (a, b, redirect) {
+    process.ShowRedirectUrl = function(a, b, redirect) {
 
         if (typeof b === 'string') {
             var j = b.toLowerCase();
@@ -177,14 +270,14 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
         return load.removeClass('hide').addClass('show');
 
     };
-    process.ConfirmBox = function (a, b) {
-        title.html(a);    // title 
-        message.html(b);  //message for box
+    process.ConfirmBox = function(a, b) {
+        title.html(a); // title 
+        message.html(b); //message for box
         $rootScope.ok.removeClass('hide').addClass('show'); //enable the Ok button
         return load.removeClass('hide').addClass('show');
 
     };
-    process.hide = function () {
+    process.hide = function() {
         return load.removeClass('show').addClass('hide');
     };
 
@@ -196,29 +289,29 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
 
 
 
-app.directive('validateEmail', function () {
+app.directive('validateEmail', function() {
     var EMAIL_REGEXP = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
 
     return {
         require: 'ngModel',
         restrict: '',
-        link: function (scope, elm, attrs, ctrl) {
+        link: function(scope, elm, attrs, ctrl) {
             // only apply the validator if ngModel is present and Angular has added the email validator
             if (ctrl && ctrl.$validators.email) {
 
                 // this will overwrite the default Angular email validator
-                ctrl.$validators.email = function (modelValue) {
+                ctrl.$validators.email = function(modelValue) {
                     return ctrl.$isEmpty(modelValue) || EMAIL_REGEXP.test(modelValue);
                 };
             }
         }
     };
 });
-app.directive('onlyDigits', function () {
+app.directive('onlyDigits', function() {
     return {
         require: 'ngModel',
         restrict: 'A',
-        link: function (scope, element, attr, ctrl) {
+        link: function(scope, element, attr, ctrl) {
             function inputValue(val) {
                 if (val) {
                     var digits = val.replace(/[^0-9]/g, '');
@@ -235,15 +328,15 @@ app.directive('onlyDigits', function () {
         }
     };
 });
-app.directive('validNumber', function () {
+app.directive('validNumber', function() {
     return {
         require: '?ngModel',
-        link: function (scope, element, attrs, ngModelCtrl) {
+        link: function(scope, element, attrs, ngModelCtrl) {
             if (!ngModelCtrl) {
                 return;
             }
 
-            ngModelCtrl.$parsers.push(function (val) {
+            ngModelCtrl.$parsers.push(function(val) {
                 if (angular.isUndefined(val)) {
                     var val = '';
                 }
@@ -255,7 +348,7 @@ app.directive('validNumber', function () {
                 return clean;
             });
 
-            element.bind('keypress', function (event) {
+            element.bind('keypress', function(event) {
                 if (event.keyCode === 32) {
                     event.preventDefault();
                 }
@@ -265,13 +358,13 @@ app.directive('validNumber', function () {
 });
 
 
-app.directive('pwCheck', [function () {
+app.directive('pwCheck', [function() {
     return {
         require: 'ngModel',
-        link: function (scope, elem, attrs, ctrl) {
+        link: function(scope, elem, attrs, ctrl) {
             var firstPassword = '#' + attrs.pwCheck;
-            elem.add(firstPassword).on('keyup', function () {
-                scope.$apply(function () {
+            elem.add(firstPassword).on('keyup', function() {
+                scope.$apply(function() {
                     var v = elem.val() === $(firstPassword).val();
                     ctrl.$setValidity('pwmatch', v);
                 });
@@ -280,8 +373,8 @@ app.directive('pwCheck', [function () {
     }
 }]);
 
-app.filter('capitalize', function () {
-    return function (input) {
+app.filter('capitalize', function() {
+    return function(input) {
         return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
     }
 });
@@ -289,7 +382,7 @@ app.filter('capitalize', function () {
 
 
 //Conditional model box to give the redirect url where we want to redirec after click OK
-app.service('model', ['$rootScope', '$location', function ($rootScope, $location) {
+app.service('model', ['$rootScope', '$location', function($rootScope, $location) {
     //////alert(window.location.path('/' + 'home'));
     var process = {};
     var url = '';
@@ -300,7 +393,7 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
     var CloseMark = angular.element(document.querySelector('.close-icon'));
     $rootScope.ok = angular.element(document.querySelector('.ok'));
 
-    $rootScope.RedirectUrl = function () {
+    $rootScope.RedirectUrl = function() {
         load.removeClass('show').addClass('hide');
         // if (url != '') {
 
@@ -310,7 +403,7 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
         // }
     }
 
-    process.show = function (a, b) {
+    process.show = function(a, b) {
 
         if (typeof b === 'string') {
             var j = b.toLowerCase();
@@ -332,7 +425,7 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
         return load.removeClass('hide').addClass('show');
     };
     // It helps to redirect the page onclick of close button 
-    process.ShowRedirectUrl = function (a, b, redirect) {
+    process.ShowRedirectUrl = function(a, b, redirect) {
 
         if (typeof b === 'string') {
             var j = b.toLowerCase();
@@ -356,18 +449,16 @@ app.service('model', ['$rootScope', '$location', function ($rootScope, $location
         return load.removeClass('hide').addClass('show');
 
     };
-    process.ConfirmBox = function (a, b) {
-        title.html(a);    // title 
-        message.html(b);  //message for box
+    process.ConfirmBox = function(a, b) {
+        title.html(a); // title 
+        message.html(b); //message for box
         $rootScope.ok.removeClass('hide').addClass('show'); //enable the Ok button
         return load.removeClass('hide').addClass('show');
 
     };
-    process.hide = function () {
+    process.hide = function() {
         return load.removeClass('show').addClass('hide');
     };
 
     return process;
 }]);
-
-

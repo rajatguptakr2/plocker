@@ -31,7 +31,7 @@ app.controller('sidemenu', function ($scope, $http, $location, $interval, $cooki
         setTimeout(function () {
 
             $rootScope.RemoveFile();
-           
+
         }, 500)
         $cookieStore.remove('userinfo');
         $cookieStore.remove('userinfo');
@@ -65,6 +65,10 @@ app.controller('sidemenu', function ($scope, $http, $location, $interval, $cooki
         $location.path('/mydownload');
 
     };
+    $scope.myradio = function () {
+        $location.path('/radio');
+
+    };
     $scope.home = function (type) {
         $window.location.reload()
         if (type == "1") {
@@ -82,7 +86,7 @@ app.controller('sidemenu', function ($scope, $http, $location, $interval, $cooki
         $location.path('/search');
     }
 
-    $scope.social_login = $cookieStore.get('userinfo').social_type;
+    //  $scope.social_login = $cookieStore.get('userinfo').social_type;
 
 
 

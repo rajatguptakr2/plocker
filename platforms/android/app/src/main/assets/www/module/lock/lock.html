@@ -1,0 +1,33 @@
+<div ng-controller="lock" ng-init="dataconnection()">
+
+
+    <div class="login-relative">
+        <article>
+            <div class="mob-lg-12 login-logo">
+                <img src="assets/images/logo.png" /> </div>
+        </article>
+        <article>
+            <div class="mob-lg-12">
+                <form method="post" name="loginform" novalidate>
+                    <div class="floating-labels">
+                        <div class="group">
+                            <input type="password" name="password" ng-model="password" maxlength="70" class="inputMaterial" required autocomplete="off"
+                            />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Enter Password</label>
+                        </div>
+                    </div>
+                    <div class="input-field-one">
+
+                    </div>
+                    <div class="input-field">
+                        <button class="background-pink" ng-click="login('loginform')">Login </button>
+                    </div>
+                </form>
+            </div>
+        </article>
+    </div>
+    <div class="login-fixed">
+        <img src="{{abc}}" width="100%" height="100%" /> </div>
+</div>

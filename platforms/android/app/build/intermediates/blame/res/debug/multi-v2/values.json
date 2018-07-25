@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\xampp\\htdocs\\project2018\\cordova\\PLocker\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "J:\\xampp\\htdocs\\lock\\plocker\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "D:\\xampp\\htdocs\\project2018\\cordova\\PLocker\\platforms\\android\\app\\src\\main\\res\\values\\strings.xml",
+                    "source": "J:\\xampp\\htdocs\\lock\\plocker\\platforms\\android\\app\\src\\main\\res\\values\\strings.xml",
                     "from": {
                         "startLines": "4,2,3",
                         "startColumns": "4,4,4",
